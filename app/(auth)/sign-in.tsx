@@ -190,7 +190,9 @@ export default function Page() {
         onPress={handleSubmit}
         disabled={!emailAddress || !password || fetchStatus === "fetching"}
       >
-        <ThemedText style={styles.buttonText}>Continue</ThemedText>
+        <ThemedText style={styles.buttonText} className="text-black">
+          Continue
+        </ThemedText>
       </Pressable>
       {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
       {errors && (

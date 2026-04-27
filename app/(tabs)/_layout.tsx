@@ -1,5 +1,6 @@
 import { useAuth } from "@clerk/expo";
-import { Redirect, Stack } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { Redirect, Tabs } from "expo-router";
 
 export default function TabsLayout() {
   const { isSignedIn, isLoaded } = useAuth();
@@ -12,5 +13,31 @@ export default function TabsLayout() {
     return <Redirect href="/sign-up" />;
   }
 
-  return <Stack />;
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        title: "home",
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="order"
+        options={{
+          title: "Orders",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="receipt-outline" size={size} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
 }
