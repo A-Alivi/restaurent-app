@@ -33,7 +33,7 @@ export default function Page() {
             return;
           }
 
-          const url = decorateUrl("/");
+          const url = decorateUrl("/home");
           if (url.startsWith("http")) {
             window.location.href = url;
           } else {
