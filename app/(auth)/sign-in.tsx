@@ -36,8 +36,10 @@ export default function Page() {
           const url = decorateUrl("/home");
           if (url.startsWith("http")) {
             window.location.href = url;
+            console.log("1", url);
           } else {
             router.push(url as Href);
+            console.log("2", url);
           }
         },
       });

@@ -8,7 +8,6 @@ export default function Page() {
   const router = useRouter();
   const handleSignOut = async () => {
     await signOut();
-    router.replace("/(auth)/sign-in"); // force redirect
   };
 
   return (

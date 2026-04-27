@@ -156,19 +156,18 @@ export default function Page() {
       >
         <ThemedText style={styles.buttonText}>Sign up</ThemedText>
       </Pressable>
-      {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
-      {errors && (
-        <ThemedText style={styles.debug}>
-          {JSON.stringify(errors, null, 2)}
-        </ThemedText>
-      )}
-
       <View style={styles.linkContainer}>
         <ThemedText>Already have an account? </ThemedText>
         <Link href="/sign-in">
           <ThemedText type="link">Sign in</ThemedText>
         </Link>
       </View>
+      {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
+      {errors && (
+        <ThemedText style={styles.debug}>
+          {JSON.stringify(errors, null, 2)}
+        </ThemedText>
+      )}
 
       {/* Required for sign-up flows. Clerk's bot sign-up protection is enabled by default */}
       <View nativeID="clerk-captcha" />
