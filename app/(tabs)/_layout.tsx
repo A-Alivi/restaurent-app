@@ -30,9 +30,9 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="order"
+        name="order-details"
         options={{
-          title: "Orders",
+          title: "Details",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="receipt-outline" size={size} color={color} />
           ),

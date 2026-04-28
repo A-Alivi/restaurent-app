@@ -1,10 +1,10 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useSignIn } from "@clerk/expo";
+import { Button } from "@react-navigation/elements";
 import { type Href, Link, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
-
 export default function Page() {
   const { signIn, errors, fetchStatus } = useSignIn();
   const router = useRouter();
@@ -190,16 +190,14 @@ export default function Page() {
         onPress={handleSubmit}
         disabled={!emailAddress || !password || fetchStatus === "fetching"}
       >
-        <ThemedText style={styles.buttonText} className="text-black">
-          Continue
-        </ThemedText>
+        <Button>Continue</Button>
       </Pressable>
       {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
-      {errors && (
-        <ThemedText style={styles.debug}>
+      {/* {errors && (
+        <ThemedText style={styles.debug}> 
           {JSON.stringify(errors, null, 2)}
         </ThemedText>
-      )}
+      )} */}
 
       <View style={styles.linkContainer}>
         <ThemedText>Don't have an account? </ThemedText>

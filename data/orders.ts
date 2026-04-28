@@ -1,4 +1,6 @@
-export const orders = [
+import Order from "../store/useOrderStore";
+
+export const orders: Order[] = [
   {
     id: "ord_001",
     userId: "user_101",
@@ -10,7 +12,13 @@ export const orders = [
         price: 450,
         total: 900,
       },
-      { productId: "p2", name: "Fries", quantity: 1, price: 250, total: 250 },
+      {
+        productId: "p2",
+        name: "Fries",
+        quantity: 1,
+        price: 250,
+        total: 250,
+      },
     ],
     pricing: {
       subtotal: 1150,
@@ -78,7 +86,13 @@ export const orders = [
         price: 1800,
         total: 1800,
       },
-      { productId: "p6", name: "Naan", quantity: 4, price: 50, total: 200 },
+      {
+        productId: "p6",
+        name: "Naan",
+        quantity: 4,
+        price: 50,
+        total: 200,
+      },
     ],
     pricing: {
       subtotal: 2000,
@@ -109,7 +123,13 @@ export const orders = [
         price: 600,
         total: 600,
       },
-      { productId: "p8", name: "Shake", quantity: 1, price: 350, total: 350 },
+      {
+        productId: "p8",
+        name: "Shake",
+        quantity: 1,
+        price: 350,
+        total: 350,
+      },
     ],
     pricing: {
       subtotal: 950,
@@ -134,7 +154,13 @@ export const orders = [
     id: "ord_005",
     userId: "user_105",
     items: [
-      { productId: "p9", name: "Pasta", quantity: 1, price: 700, total: 700 },
+      {
+        productId: "p9",
+        name: "Pasta",
+        quantity: 1,
+        price: 700,
+        total: 700,
+      },
     ],
     pricing: {
       subtotal: 700,

@@ -163,11 +163,11 @@ export default function Page() {
         </Link>
       </View>
       {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
-      {errors && (
+      {/* {errors && (
         <ThemedText style={styles.debug}>
           {JSON.stringify(errors, null, 2)}
         </ThemedText>
-      )}
+      )} */}
 
       {/* Required for sign-up flows. Clerk's bot sign-up protection is enabled by default */}
       <View nativeID="clerk-captcha" />
