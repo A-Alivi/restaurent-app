@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useSignIn } from "@clerk/expo";
+import { Button } from "@react-navigation/elements";
 import { type Href, Link, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
@@ -21,6 +22,7 @@ export default function Page() {
       console.error(JSON.stringify(error, null, 2));
       return;
     }
+    console.log("Clicked");
 
     if (signIn.status === "complete") {
       await signIn.finalize({
@@ -189,7 +191,8 @@ export default function Page() {
         onPress={handleSubmit}
         disabled={!emailAddress || !password || fetchStatus === "fetching"}
       >
-        <ThemedText className="text-black text-3xl">Continue</ThemedText>
+        {/* <ThemedText className="text-black text-3xl">Continue</ThemedText> */}
+        <Button className="text-3xl text-lime-600">Login</Button>
       </Pressable>
       {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
       {/* {errors && (
