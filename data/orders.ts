@@ -1,4 +1,4 @@
-import Order from "../store/useOrderStore";
+import { Order } from "../store/useOrderStore";
 
 export const orders: Order[] = [
   {

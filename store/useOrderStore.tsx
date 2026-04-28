@@ -7,7 +7,7 @@ type OrderStatus =
   | "delivered"
   | "cancelled";
 
-interface OrderItem {
+export interface OrderItem {
   productId: string;
   name: string;
   quantity: number;
@@ -15,7 +15,7 @@ interface OrderItem {
   total: number;
 }
 
-interface Order {
+export interface Order {
   id: string;
   userId: string;
   items: OrderItem[];
@@ -41,7 +41,7 @@ interface Order {
   };
 }
 
-interface OrderStore {
+export interface OrderStore {
   orders: Order[];
 
   // actions
