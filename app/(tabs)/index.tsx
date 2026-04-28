@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import OrderCard from "../../components/order/order-card";
 import { orders as initialOrders } from "../../data/orders";
@@ -8,6 +8,7 @@ export default function OrdersScreen() {
   const orders = useOrderStore((state) => state.orders);
   const setOrders = useOrderStore((state) => state.setOrders);
   const updateStatus = useOrderStore((state) => state.updateOrderStatus);
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
 
   useEffect(() => {
     setOrders(initialOrders);
@@ -36,7 +37,15 @@ export default function OrdersScreen() {
         )}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <OrderCard order={item} onUpdateStatus={handleUpdateStatus} />
+          <OrderCard
+            order={item}
+            isOpen={openDropdownId === item.id}
+            onToggle={() =>
+              setOpenDropdownId(openDropdownId === item.id ? null : item.id)
+            }
+            onClose={() => setOpenDropdownId(null)}
+            onUpdateStatus={handleUpdateStatus}
+          />
         )}
         ListEmptyComponent={
           <Text className="text-center mt-10 text-gray-500">

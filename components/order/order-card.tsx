@@ -1,5 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 const STATUSES = [
   "pending",
   "preparing",
@@ -7,7 +8,13 @@ const STATUSES = [
   "delivered",
   "cancelled",
 ];
-export default function OrderCard({ order, onUpdateStatus }: any) {
+export default function OrderCard({
+  order,
+  isOpen,
+  onToggle,
+  onClose,
+  onUpdateStatus,
+}: any) {
   const [open, setOpen] = useState(false);
 
   const statusColors: any = {
@@ -37,57 +44,57 @@ export default function OrderCard({ order, onUpdateStatus }: any) {
           <Text className="font-bold text-base">#{order.id}</Text>
 
           {/* STATUS BUTTON */}
-          <TouchableOpacity onPress={() => setOpen(!open)}>
+          <Pressable onPress={onToggle}>
             <Text
-              className={`text-white text-xs px-3 py-1 rounded-full capitalize ${
+              className={`text-white text-xs px-3 py-1 rounded-full ${
                 statusColors[order.status]
               }`}
             >
               {order.status.replaceAll("_", " ")}
+              <Ionicons name="caret-down-sharp" className="ms-1"></Ionicons>
             </Text>
-          </TouchableOpacity>
+          </Pressable>
+
+          {/* DROPDOWN */}
+          {isOpen && (
+            <View className="absolute right-4  bg-white rounded-xl shadow p-2 w-44 z-50">
+              {STATUSES.map((status) => (
+                <Pressable
+                  key={status}
+                  className="py-2 px-2"
+                  onPress={() => {
+                    onUpdateStatus(order.id, status);
+                    onClose(); // close after selection
+                  }}
+                >
+                  <Text className="capitalize">
+                    {status.replaceAll("_", " ")}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          )}
         </View>
 
-        {/* DROPDOWN */}
-        {open && (
-          <View className="absolute right-4 top-12 bg-white rounded-xl shadow p-2 w-44 z-50">
-            {STATUSES.map((status) => (
-              <TouchableOpacity
-                key={status}
-                className="py-2 px-2 rounded-lg hover:bg-gray-100"
-                onPress={() => {
-                  onUpdateStatus(order.id, status);
-                  setOpen(false);
-                }}
-              >
-                <Text className="text-sm capitalize">
-                  {status.replaceAll("_", " ")}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      </View>
+        {/* Items */}
+        <View className="my-2">
+          {order.items.map((item: any) => (
+            <Text key={item.productId} className="text-gray-600 text-sm">
+              {item.quantity}x {item.name}
+            </Text>
+          ))}
+        </View>
 
-      {/* Items */}
-      <View className="my-2">
-        {order.items.map((item: any) => (
-          <Text key={item.productId} className="text-gray-600 text-sm">
-            {item.quantity}x {item.name}
+        {/* Footer */}
+        <View className="flex-row justify-between items-center mt-2">
+          <Text className="font-semibold text-base">
+            Rs {order.pricing.total}
           </Text>
-        ))}
-      </View>
 
-      {/* Footer */}
-      <View className="flex-row justify-between items-center mt-2">
-        <Text className="font-semibold text-base">
-          Rs {order.pricing.total}
-        </Text>
+          <Text className="text-gray-400 text-sm">{order.delivery.city}</Text>
+        </View>
 
-        <Text className="text-gray-400 text-sm">{order.delivery.city}</Text>
-      </View>
-
-      {/* Button
+        {/* Button
       {order.status !== "delivered" && order.status !== "cancelled" && (
         <TouchableOpacity
           className="bg-black mt-3 py-2 rounded-xl items-center"
@@ -96,6 +103,7 @@ export default function OrderCard({ order, onUpdateStatus }: any) {
           <Text className="text-white">Update Status</Text>
         </TouchableOpacity>
       )} */}
+      </View>
     </View>
   );
 }

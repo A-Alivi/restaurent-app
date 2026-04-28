@@ -64,7 +64,7 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
       orders: [order, ...state.orders],
     })),
 
-  updateOrderStatus: (id, status) =>
+  updateOrderStatus: (id: string, status: OrderStatus) =>
     set((state) => ({
       orders: state.orders.map((order) =>
         order.id === id
