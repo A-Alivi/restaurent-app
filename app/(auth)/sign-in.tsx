@@ -1,10 +1,7 @@
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { useSignIn } from "@clerk/expo";
-import { Button } from "@react-navigation/elements";
 import { type Href, Link, useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 export default function Page() {
   const { signIn, errors, fetchStatus } = useSignIn();
   const router = useRouter();
@@ -37,10 +34,8 @@ export default function Page() {
           const url = decorateUrl("/");
           if (url.startsWith("http")) {
             window.location.href = url;
-            console.log("1", url);
           } else {
             router.push(url as Href);
-            console.log("2", url);
           }
         },
       });
@@ -91,13 +86,8 @@ export default function Page() {
 
   if (signIn.status === "needs_client_trust") {
     return (
-      <ThemedView style={styles.container}>
-        <ThemedText
-          type="title"
-          style={[styles.title, { fontSize: 24, fontWeight: "bold" }]}
-        >
-          Verify your account
-        </ThemedText>
+      <View style={styles.container}>
+        <Text className="text-2xl font-bold">Verify your account</Text>
         <TextInput
           style={styles.input}
           value={code}
@@ -107,9 +97,7 @@ export default function Page() {
           keyboardType="numeric"
         />
         {errors.fields.code && (
-          <ThemedText style={styles.error}>
-            {errors.fields.code.message}
-          </ThemedText>
+          <Text style={styles.error}>{errors.fields.code.message}</Text>
         )}
         <Pressable
           style={({ pressed }) => [
@@ -120,7 +108,7 @@ export default function Page() {
           onPress={handleVerify}
           disabled={fetchStatus === "fetching"}
         >
-          <ThemedText style={styles.buttonText}>Verify</ThemedText>
+          <Text style={styles.buttonText}>Verify</Text>
         </Pressable>
         <Pressable
           style={({ pressed }) => [
@@ -129,9 +117,7 @@ export default function Page() {
           ]}
           onPress={() => signIn.mfa.sendEmailCode()}
         >
-          <ThemedText style={styles.secondaryButtonText}>
-            I need a new code
-          </ThemedText>
+          <Text style={styles.secondaryButtonText}>I need a new code</Text>
         </Pressable>
         <Pressable
           style={({ pressed }) => [
@@ -140,19 +126,17 @@ export default function Page() {
           ]}
           onPress={() => signIn.reset()}
         >
-          <ThemedText style={styles.secondaryButtonText}>Start over</ThemedText>
+          <Text style={styles.secondaryButtonText}>Start over</Text>
         </Pressable>
-      </ThemedView>
+      </View>
     );
   }
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title" style={styles.title}>
-        Sign in
-      </ThemedText>
+    <View style={styles.container}>
+      <Text className="text-2xl font-bold">Sign in</Text>
 
-      <ThemedText style={styles.label}>Email address</ThemedText>
+      <Text style={styles.label}>Email address</Text>
       <TextInput
         style={styles.input}
         autoCapitalize="none"
@@ -163,11 +147,9 @@ export default function Page() {
         keyboardType="email-address"
       />
       {errors.fields.identifier && (
-        <ThemedText style={styles.error}>
-          {errors.fields.identifier.message}
-        </ThemedText>
+        <Text style={styles.error}>{errors.fields.identifier.message}</Text>
       )}
-      <ThemedText style={styles.label}>Password</ThemedText>
+      <Text style={styles.label}>Password</Text>
       <TextInput
         style={styles.input}
         value={password}
@@ -177,9 +159,7 @@ export default function Page() {
         onChangeText={(password) => setPassword(password)}
       />
       {errors.fields.password && (
-        <ThemedText style={styles.error}>
-          {errors.fields.password.message}
-        </ThemedText>
+        <Text style={styles.error}>{errors.fields.password.message}</Text>
       )}
       <Pressable
         style={({ pressed }) => [
@@ -191,23 +171,17 @@ export default function Page() {
         onPress={handleSubmit}
         disabled={!emailAddress || !password || fetchStatus === "fetching"}
       >
-        {/* <ThemedText className="text-black text-3xl">Continue</ThemedText> */}
-        <Button className="text-3xl text-lime-600">Login</Button>
+        {/* <Text className="text-black text-3xl">Continue</Text> */}
+        <Text className="text-xl text-black">Continue</Text>
       </Pressable>
-      {/* For your debugging purposes. You can just console.log errors, but we put them in the UI for convenience */}
-      {/* {errors && (
-        <ThemedText style={styles.debug}> 
-          {JSON.stringify(errors, null, 2)}
-        </ThemedText>
-      )} */}
 
       <View style={styles.linkContainer}>
-        <ThemedText>Don't have an account? </ThemedText>
+        <Text>Don't have an account? </Text>
         <Link href="/sign-up">
-          <ThemedText type="link">Sign up</ThemedText>
+          <Text className="text-blue-500 underline">Sign up</Text>{" "}
         </Link>
       </View>
-    </ThemedView>
+    </View>
   );
 }
 
