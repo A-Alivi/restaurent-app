@@ -29,7 +29,7 @@ export default function TabsLayout() {
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="order-details"
         options={{
           title: "Details",
@@ -37,7 +37,7 @@ export default function TabsLayout() {
             <Ionicons name="receipt-outline" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="profile"
         options={{

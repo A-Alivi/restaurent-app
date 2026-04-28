@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 import { useState } from "react";
 import { Pressable, Text, View } from "react-native";
 const STATUSES = [
@@ -91,7 +92,16 @@ export default function OrderCard({
             Rs {order.pricing.total}
           </Text>
 
-          <Text className="text-gray-400 text-sm">{order.delivery.city}</Text>
+          <Pressable
+            onPress={() => {
+              router.push({
+                pathname: "/screens/order-detail",
+                params: { order: order },
+              });
+            }}
+          >
+            <Text className="text-blue-500 underline">Details</Text>
+          </Pressable>
         </View>
 
         {/* Button

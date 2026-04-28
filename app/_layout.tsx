@@ -11,7 +11,17 @@ if (!publishableKey) {
 export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="order-detail"
+          options={{
+            title: "Order Details",
+            headerBackTitle: "back",
+            headerShown: true,
+          }}
+        />
+      </Stack>
     </ClerkProvider>
   );
 }
