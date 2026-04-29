@@ -1,8 +1,8 @@
-import OrderItem from "@/components/order/order-item";
+import OrderItem from "@/app/components/order/order-item";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
-import { orders } from "../../data/orders";
+import { orders } from "../data/orders";
 const OrderDetailScreen = () => {
   const { id } = useLocalSearchParams();
   const order = orders.find((order) => order.id === id);

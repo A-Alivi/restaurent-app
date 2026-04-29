@@ -1,4 +1,4 @@
-import { useOrderStore } from "@/store/useOrderStore";
+import { useOrderStore } from "@/app/store/useOrderStore";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { Pressable, TextInput, View } from "react-native";

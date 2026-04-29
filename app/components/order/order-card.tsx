@@ -95,7 +95,7 @@ export default function OrderCard({
           <Pressable
             onPress={() => {
               router.push({
-                pathname: "/screens/order-detail",
+                pathname: "./screens/order-detail.tsx",
                 params: { id: order.id },
               });
             }}

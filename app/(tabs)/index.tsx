@@ -1,9 +1,9 @@
-import SearchInput from "@/components/SearchInput";
+import SearchInput from "@/app/components/SearchInput";
 import { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
-import OrderCard from "../../components/order/order-card";
-import { orders as initialOrders } from "../../data/orders";
-import { useOrderStore } from "../../store/useOrderStore";
+import OrderCard from "../components/order/order-card";
+import { orders as initialOrders } from "../data/orders";
+import { useOrderStore } from "../store/useOrderStore";
 
 export default function OrdersScreen() {
   const orders = useOrderStore((state) => state.orders);
