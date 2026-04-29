@@ -19,7 +19,6 @@ export default function Page() {
       console.error(JSON.stringify(error, null, 2));
       return;
     }
-    console.log("Clicked");
 
     if (signIn.status === "complete") {
       await signIn.finalize({

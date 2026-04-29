@@ -96,7 +96,7 @@ export default function OrderCard({
             onPress={() => {
               router.push({
                 pathname: "/screens/order-detail",
-                params: { order: order },
+                params: { id: order.id },
               });
             }}
           >
