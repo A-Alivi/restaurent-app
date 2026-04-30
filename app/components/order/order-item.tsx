@@ -11,7 +11,7 @@ const OrderItem = ({ items }: any) => {
   return (
     <View className="flex-col m-3  p-3 shadow rounded">
       <View className="flex-row">
-        <Ionicons className="p-2" name="list" size={18} color="red" />
+        <Ionicons className="p-2" name="list-outline" size={16} color="red" />
         <Text className="text-2l font-semibold py-2">Order Items</Text>
       </View>
 
