@@ -42,14 +42,7 @@ export default function HomeScreen() {
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
-        renderItem={(order: any) => (
-          <OrderCard
-            order={order}
-            onPress={() =>
-              router.push(`../screens/order-detail?id=${order.id}`)
-            }
-          />
-        )}
+        renderItem={(order: any) => <OrderCard order={order} />}
       />
     </View>
   );

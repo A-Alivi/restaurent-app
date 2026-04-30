@@ -1,16 +1,26 @@
+import { OrderStatus, useOrderStore } from "@/app/store/useOrderStore";
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import StatusBadge from "../ui/StatusBadge";
 import OrderItemRow from "./OrderItemRow";
 
-export default function OrderCard({ order, onPress }: any) {
+export default function OrderCard({ order }: any) {
+  const router = useRouter();
   const borderColor: any = {
     pending: "border-orange-400",
     preparing: "border-blue-400",
     delivering: "border-orange-300",
     delivered: "border-green-400",
   };
-  console.log("inside ordercard", order.item);
+  const orderStore = useOrderStore();
+  function handleAccpt(id: string, status: OrderStatus) {
+    orderStore.updateOrderStatus(id, status);
+  }
+  function handleDecline(id: string) {
+    orderStore.updateOrderStatus(id, "cancelled");
+  }
+  let total = 0;
 
   return (
     <View
@@ -40,21 +50,37 @@ export default function OrderCard({ order, onPress }: any) {
 
       {/* Footer */}
       <View className="flex-row justify-between items-center mt-3">
-        <Text className="text-lg font-semibold"></Text>
+        {order.item.items.forEach((element: any) => {
+          total += element.price;
+        })}
+        <Text className="text-lg font-semibold">Rs.{total}</Text>
 
         {/* Actions */}
-        {order.status === "pending" ? (
+        {order.item.status === "pending" ? (
           <View className="flex-row gap-2">
-            <Pressable className="border px-3 py-1 rounded-lg">
+            <Pressable
+              className="border px-3 py-1 rounded-lg"
+              onPress={() => handleDecline(order.item.id)}
+            >
               <Text>Decline</Text>
             </Pressable>
 
-            <Pressable className="bg-red-600 px-3 py-1 rounded-lg">
+            <Pressable
+              className="bg-red-600 px-3 py-1 rounded-lg"
+              onPress={() => handleAccpt(order.item.id, "preparing")}
+            >
               <Text className="text-white">Accept</Text>
             </Pressable>
           </View>
         ) : (
-          <Pressable onPress={onPress}>
+          <Pressable
+            onPress={() =>
+              router.push({
+                pathname: "/screens/order-detail",
+                params: { id: order.item.id },
+              })
+            }
+          >
             <Text className="text-red-600 font-medium">Details</Text>
           </Pressable>
         )}

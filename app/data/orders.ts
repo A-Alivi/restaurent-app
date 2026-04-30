@@ -1,5 +1,4 @@
 import { Order } from "../store/useOrderStore";
-
 export const orders: Order[] = [
   {
     id: "ord_001",
@@ -12,6 +11,7 @@ export const orders: Order[] = [
         quantity: 2,
         price: 450,
         total: 900,
+        note: "Extra mayo", // ✅ has note
       },
       {
         productId: "p2",
@@ -19,20 +19,13 @@ export const orders: Order[] = [
         quantity: 1,
         price: 250,
         total: 250,
+        note: "", // ✅ empty note
       },
     ],
-    pricing: {
-      subtotal: 1150,
-      tax: 115,
-      deliveryFee: 100,
-      total: 1365,
-    },
+    pricing: { subtotal: 1150, tax: 115, deliveryFee: 100, total: 1365 },
     status: "pending",
     payment: { method: "cash", status: "pending" },
-    delivery: {
-      address: "Satellite Town, Rawalpindi",
-      city: "Rawalpindi",
-    },
+    delivery: { address: "Satellite Town, Rawalpindi", city: "Rawalpindi" },
     timestamps: {
       createdAt: "2026-04-27T10:00:00Z",
       updatedAt: "2026-04-27T10:00:00Z",
@@ -50,6 +43,7 @@ export const orders: Order[] = [
         quantity: 1,
         price: 1200,
         total: 1200,
+        note: "No olives", // ✅ has note
       },
       {
         productId: "p4",
@@ -57,20 +51,13 @@ export const orders: Order[] = [
         quantity: 2,
         price: 150,
         total: 300,
+        note: "",
       },
     ],
-    pricing: {
-      subtotal: 1500,
-      tax: 150,
-      deliveryFee: 120,
-      total: 1770,
-    },
+    pricing: { subtotal: 1500, tax: 150, deliveryFee: 120, total: 1770 },
     status: "preparing",
     payment: { method: "card", status: "paid" },
-    delivery: {
-      address: "Bahria Town Phase 4",
-      city: "Rawalpindi",
-    },
+    delivery: { address: "Bahria Town Phase 4", city: "Rawalpindi" },
     timestamps: {
       createdAt: "2026-04-27T09:30:00Z",
       updatedAt: "2026-04-27T09:45:00Z",
@@ -88,6 +75,7 @@ export const orders: Order[] = [
         quantity: 1,
         price: 1800,
         total: 1800,
+        note: "Less spicy",
       },
       {
         productId: "p6",
@@ -95,20 +83,13 @@ export const orders: Order[] = [
         quantity: 4,
         price: 50,
         total: 200,
+        note: "",
       },
     ],
-    pricing: {
-      subtotal: 2000,
-      tax: 200,
-      deliveryFee: 150,
-      total: 2350,
-    },
+    pricing: { subtotal: 2000, tax: 200, deliveryFee: 150, total: 2350 },
     status: "out_for_delivery",
     payment: { method: "cash", status: "pending" },
-    delivery: {
-      address: "Chaklala Scheme 3",
-      city: "Rawalpindi",
-    },
+    delivery: { address: "Chaklala Scheme 3", city: "Rawalpindi" },
     timestamps: {
       createdAt: "2026-04-27T08:45:00Z",
       updatedAt: "2026-04-27T09:15:00Z",
@@ -133,20 +114,13 @@ export const orders: Order[] = [
         quantity: 1,
         price: 350,
         total: 350,
+        note: "No sugar",
       },
     ],
-    pricing: {
-      subtotal: 950,
-      tax: 95,
-      deliveryFee: 100,
-      total: 1145,
-    },
+    pricing: { subtotal: 950, tax: 95, deliveryFee: 100, total: 1145 },
     status: "delivered",
     payment: { method: "online", status: "paid" },
-    delivery: {
-      address: "DHA Phase 2",
-      city: "Islamabad",
-    },
+    delivery: { address: "DHA Phase 2", city: "Islamabad" },
     timestamps: {
       createdAt: "2026-04-26T20:00:00Z",
       updatedAt: "2026-04-26T20:40:00Z",
@@ -165,20 +139,13 @@ export const orders: Order[] = [
         quantity: 1,
         price: 700,
         total: 700,
+        note: "Extra cheese",
       },
     ],
-    pricing: {
-      subtotal: 700,
-      tax: 70,
-      deliveryFee: 100,
-      total: 870,
-    },
+    pricing: { subtotal: 700, tax: 70, deliveryFee: 100, total: 870 },
     status: "cancelled",
     payment: { method: "card", status: "failed" },
-    delivery: {
-      address: "Gulraiz Housing Scheme",
-      city: "Rawalpindi",
-    },
+    delivery: { address: "Gulraiz Housing Scheme", city: "Rawalpindi" },
     timestamps: {
       createdAt: "2026-04-27T07:30:00Z",
       updatedAt: "2026-04-27T07:45:00Z",

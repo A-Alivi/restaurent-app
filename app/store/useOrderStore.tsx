@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type OrderStatus =
+export type OrderStatus =
   | "pending"
   | "preparing"
   | "out_for_delivery"
@@ -13,6 +13,7 @@ export interface OrderItem {
   quantity: number;
   price: number;
   total: number;
+  note?: string;
 }
 
 export interface Order {

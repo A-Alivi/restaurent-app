@@ -50,17 +50,20 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { orders } from "../data/orders";
+import { useOrderStore } from "../store/useOrderStore";
 const OrderDetailScreen = () => {
   const { id } = useLocalSearchParams();
-  const order = orders.find((order) => order.id === id);
-  let totalPrice = 0;
+  console.log("ID", id);
 
-  const orderPlacedAt = String(order?.timestamps.updatedAt);
-  const items = order?.items;
-  items?.forEach((item: any) => {
-    totalPrice = totalPrice + item.price;
-  });
+  const orderStore = useOrderStore();
+  const orderPlacedAt = "";
+  const totalPrice = 9;
+  const item = orderStore.orders.find((order) => order.id === id);
+  console.log("Item", item);
+  // items?.forEach((item: any) => {
+  //   totalPrice = totalPrice + item.price;
+  // });
+  console.log(item);
   return (
     <View className="flex-1 bg-[#f5efec]">
       <ScrollView className="p-4">
@@ -83,7 +86,7 @@ const OrderDetailScreen = () => {
           </View>
 
           {/* Item */}
-          {items?.map((item, i) => (
+          {item?.items?.map((item, i) => (
             <View key={i} className="border-b border-gray-100 py-3">
               <View className="flex-row justify-between items-center">
                 <View className="flex-row items-center">
@@ -99,13 +102,13 @@ const OrderDetailScreen = () => {
 
                   <View className="ml-3">
                     <Text className="font-medium">{item.name}</Text>
-                    {/* {item.note && (
+                    {item.note && (
                       <Text className="text-gray-400 text-xs">{item.note}</Text>
-                    )} */}
+                    )}
                   </View>
                 </View>
 
-                <Text className="font-medium">${item.price}.00</Text>
+                <Text className="font-medium">Rs.{item.price}.00</Text>
               </View>
             </View>
           ))}
