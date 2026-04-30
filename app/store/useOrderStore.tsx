@@ -19,6 +19,7 @@ export interface Order {
   id: string;
   userId: string;
   items: OrderItem[];
+  username: string;
   pricing: {
     subtotal: number;
     tax: number;

@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
 import StatusBadge from "../ui/StatusBadge";
 import OrderItemRow from "./OrderItemRow";
@@ -9,7 +10,7 @@ export default function OrderCard({ order, onPress }: any) {
     delivering: "border-orange-300",
     delivered: "border-green-400",
   };
-  console.log("inside ordercard", order.item.items);
+  console.log("inside ordercard", order.item);
 
   return (
     <View
@@ -19,10 +20,15 @@ export default function OrderCard({ order, onPress }: any) {
       <View className="flex-row justify-between items-center">
         <View>
           <Text className="text-xl font-bold">{order.item.id}</Text>
-          <Text className="text-gray-500">Customer</Text>
+          <Text className="text-gray-500">{order.item.username}</Text>
         </View>
-
-        <StatusBadge status={order.item.status} />
+        <View>
+          <View className="flex-row py-2 ms-1 justify-end">
+            <Ionicons name="timer-outline" size={18} />
+            <Text className="text-gray-400 ms-1 ">5 min ago</Text>
+          </View>
+          <StatusBadge status={order.item.status} />
+        </View>
       </View>
 
       {/* Items */}

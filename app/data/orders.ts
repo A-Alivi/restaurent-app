@@ -4,6 +4,7 @@ export const orders: Order[] = [
   {
     id: "ord_001",
     userId: "user_101",
+    username: "Ali Khan",
     items: [
       {
         productId: "p1",
@@ -41,6 +42,7 @@ export const orders: Order[] = [
   {
     id: "ord_002",
     userId: "user_102",
+    username: "Ahmed Raza",
     items: [
       {
         productId: "p3",
@@ -78,6 +80,7 @@ export const orders: Order[] = [
   {
     id: "ord_003",
     userId: "user_103",
+    username: "Usman Tariq",
     items: [
       {
         productId: "p5",
@@ -115,6 +118,7 @@ export const orders: Order[] = [
   {
     id: "ord_004",
     userId: "user_104",
+    username: "Sara Malik",
     items: [
       {
         productId: "p7",
@@ -153,6 +157,7 @@ export const orders: Order[] = [
   {
     id: "ord_005",
     userId: "user_105",
+    username: "Hassan Ali",
     items: [
       {
         productId: "p9",
