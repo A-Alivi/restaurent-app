@@ -1,6 +1,6 @@
-import { OrderStatus } from "@/app/store/useOrderStore";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Pressable, Text, View } from "react-native";
+import { OrderStatus } from "../../store/useOrderStore";
 import { orderActions } from "../../utils/orderActions";
 
 export default function OrderActions({

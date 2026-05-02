@@ -3,8 +3,8 @@ import { formatDistanceToNow } from "date-fns";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-import { useOrderStore } from "../store/useOrderStore";
-import getInitials from "../utils/getInitials";
+import { useOrderStore } from "../../store/useOrderStore";
+import getInitials from "../../utils/getInitials";
 const OrderDetailScreen = () => {
   const { id } = useLocalSearchParams();
   console.log("ID", id);

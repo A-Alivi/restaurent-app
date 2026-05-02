@@ -1,9 +1,9 @@
 // screens/NotificationScreen.tsx
 import React, { useState } from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
-import Header from "../components/notification/Header";
-import NotificationCard from "../components/notification/NotificationCard";
-import { notificationsData } from "../data/notification";
+import Header from "../../components/notification/Header";
+import NotificationCard from "../../components/notification/NotificationCard";
+import { notificationsData } from "../../data/notification";
 import { Notification } from "../models/notification";
 
 const NotificationScreen = () => {

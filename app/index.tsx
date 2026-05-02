@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { View } from "react-native";
+import { orders } from "../data/orders";
 import "../global.css";
-import { orders } from "./data/orders";
+import { useOrderStore } from "../store/useOrderStore";
 import SSOCallbackScreen from "./sso-callback";
-import { useOrderStore } from "./store/useOrderStore";
 
 const index = () => {
   const setOrders = useOrderStore((state) => state.setOrders);
