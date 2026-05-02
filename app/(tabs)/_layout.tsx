@@ -17,7 +17,6 @@ export default function TabsLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        title: "home",
       }}
     >
       <Tabs.Screen
@@ -29,15 +28,15 @@ export default function TabsLayout() {
           ),
         }}
       />
-      {/* <Tabs.Screen
-        name="order-details"
+      <Tabs.Screen
+        name="notification"
         options={{
-          title: "Details",
+          title: "Notifications",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="receipt-outline" size={size} color={color} />
+            <Ionicons name="notifications" size={size} color={color} />
           ),
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="profile"
         options={{

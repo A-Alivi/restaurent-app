@@ -1,9 +1,13 @@
 import { Order } from "../store/useOrderStore";
+
 export const orders: Order[] = [
   {
     id: "ord_001",
-    userId: "user_101",
-    username: "Ali Khan",
+    user: {
+      id: "user_101",
+      name: "Ali Khan",
+      contact: "0301-1234567",
+    },
     items: [
       {
         productId: "p1",
@@ -11,7 +15,7 @@ export const orders: Order[] = [
         quantity: 2,
         price: 450,
         total: 900,
-        note: "Extra mayo", // ✅ has note
+        note: "Extra mayo",
       },
       {
         productId: "p2",
@@ -19,7 +23,7 @@ export const orders: Order[] = [
         quantity: 1,
         price: 250,
         total: 250,
-        note: "", // ✅ empty note
+        note: "",
       },
     ],
     pricing: { subtotal: 1150, tax: 115, deliveryFee: 100, total: 1365 },
@@ -34,8 +38,11 @@ export const orders: Order[] = [
 
   {
     id: "ord_002",
-    userId: "user_102",
-    username: "Ahmed Raza",
+    user: {
+      id: "user_102",
+      name: "Ahmed Raza",
+      contact: "0302-2345678",
+    },
     items: [
       {
         productId: "p3",
@@ -43,7 +50,7 @@ export const orders: Order[] = [
         quantity: 1,
         price: 1200,
         total: 1200,
-        note: "No olives", // ✅ has note
+        note: "No olives",
       },
       {
         productId: "p4",
@@ -66,8 +73,11 @@ export const orders: Order[] = [
 
   {
     id: "ord_003",
-    userId: "user_103",
-    username: "Usman Tariq",
+    user: {
+      id: "user_103",
+      name: "Usman Tariq",
+      contact: "0303-3456789",
+    },
     items: [
       {
         productId: "p5",
@@ -98,8 +108,11 @@ export const orders: Order[] = [
 
   {
     id: "ord_004",
-    userId: "user_104",
-    username: "Sara Malik",
+    user: {
+      id: "user_104",
+      name: "Sara Malik",
+      contact: "0304-4567890",
+    },
     items: [
       {
         productId: "p7",
@@ -130,8 +143,11 @@ export const orders: Order[] = [
 
   {
     id: "ord_005",
-    userId: "user_105",
-    username: "Hassan Ali",
+    user: {
+      id: "user_105",
+      name: "Hassan Ali",
+      contact: "0305-5678901",
+    },
     items: [
       {
         productId: "p9",

@@ -1,5 +1,6 @@
 import { OrderStatus, useOrderStore } from "@/app/store/useOrderStore";
 import { Ionicons } from "@expo/vector-icons";
+import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import StatusBadge from "../ui/StatusBadge";
@@ -35,7 +36,16 @@ export default function OrderCard({ order }: any) {
         <View>
           <View className="flex-row py-2 ms-1 justify-end">
             <Ionicons name="timer-outline" size={18} />
-            <Text className="text-gray-400 ms-1 ">5 min ago</Text>
+            <Text className="text-gray-400 ms-1 ">
+              {order.item?.timestamps?.updatedAt
+                ? formatDistanceToNow(
+                    new Date(order.item.timestamps.updatedAt),
+                    {
+                      addSuffix: true,
+                    },
+                  )
+                : ""}
+            </Text>
           </View>
           <StatusBadge status={order.item.status} />
         </View>

@@ -1,76 +1,31 @@
-// import OrderItem from "@/app/components/order/order-item";
-// import { useLocalSearchParams } from "expo-router";
-// import React from "react";
-// import { Text, View } from "react-native";
-// import { orders } from "../data/orders";
-// const OrderDetailScreen = () => {
-//   const { id } = useLocalSearchParams();
-//   const order = orders.find((order) => order.id === id);
-//   const orderPlacedAt = String(order?.timestamps.updatedAt);
-//   const items = order?.items;
-//   console.log(items);
-//   return (
-//     <View className="m-3 p-3">
-//       <Text className="font-bold text-3xl my-1">{id}</Text>
-//       <Text className="text-sm color-gray-400 my-1">
-//         placed {getTimeAgo(orderPlacedAt)}
-//       </Text>
-
-//       <OrderItem items={items} />
-//     </View>
-//   );
-// };
-
-// export default OrderDetailScreen;
-
-const getTimeAgo = (dateString: string) => {
-  const now = new Date();
-  const created = new Date(dateString);
-
-  const diffMs = now.getTime() - created.getTime();
-
-  const diffMinutes = Math.floor(diffMs / (1000 * 60));
-  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-  if (diffMinutes < 1) return "Just now";
-
-  if (diffMinutes < 60) {
-    return diffMinutes === 1 ? "1 min ago" : `${diffMinutes} mins ago`;
-  }
-
-  if (diffHours < 24) {
-    return diffHours === 1 ? "1 hr ago" : `${diffHours} hrs ago`;
-  }
-
-  return diffDays === 1 ? "1 day ago" : `${diffDays} days ago`;
-};
-
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { formatDistanceToNow } from "date-fns";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { useOrderStore } from "../store/useOrderStore";
+import getInitials from "../utils/getInitials";
 const OrderDetailScreen = () => {
   const { id } = useLocalSearchParams();
   console.log("ID", id);
-
   const orderStore = useOrderStore();
   const orderPlacedAt = "";
-  const totalPrice = 9;
-  const item = orderStore.orders.find((order) => order.id === id);
-  console.log("Item", item);
-  // items?.forEach((item: any) => {
-  //   totalPrice = totalPrice + item.price;
-  // });
-  console.log(item);
+  let totalPrice = 0;
+  const item = orderStore?.orders.find((order) => order.id === id);
+  item?.items?.forEach((item: any) => (totalPrice = totalPrice + item.price));
+  console.log(item?.user.name);
   return (
     <View className="flex-1 bg-[#f5efec]">
       <ScrollView className="p-4">
         {/* Header */}
         <Text className="text-3xl font-bold text-[#2b1a14] mb-1">{id}</Text>
         <Text className="text-gray-500 mb-3">
-          Placed {getTimeAgo(orderPlacedAt)}
+          Placed{" "}
+          {item?.timestamps?.updatedAt
+            ? formatDistanceToNow(new Date(item.timestamps.updatedAt), {
+                addSuffix: true,
+              })
+            : ""}
         </Text>
 
         {/* Status Badge */}
@@ -131,19 +86,22 @@ const OrderDetailScreen = () => {
 
           <View className="flex-row items-center mb-3">
             <View className="w-12 h-12 rounded-full bg-[#f3d6cc] items-center justify-center">
-              <Text className="font-bold text-[#b23a1a]">SJ</Text>
+              <Text className="font-bold text-[#b23a1a]">
+                {getInitials(item?.user.name)}
+              </Text>
             </View>
 
             <View className="ml-3">
-              <Text className="font-medium">Sarah J.</Text>
-              <Text className="text-gray-500 text-sm">+1-555-0199</Text>
+              <Text className="font-medium">{item?.user.name}</Text>
+              <Text className="text-gray-500 text-sm">
+                {item?.user.contact}
+              </Text>
             </View>
           </View>
 
           <View className="border-t border-gray-200 pt-3">
-            <Text className="text-gray-500">Delivery Address</Text>
-            <Text>123 Maple Street</Text>
-            <Text>Apt 4B</Text>
+            <Text className="text-gray-500">{item?.delivery.address}</Text>
+            <Text>{item?.delivery.city}</Text>
           </View>
         </View>
 
@@ -166,7 +124,7 @@ const OrderDetailScreen = () => {
           </Pressable>
 
           <Pressable className="bg-gray-200 p-4 rounded-xl mb-3 flex-row justify-center items-center">
-            <Ionicons name="car-outline" size={18} color="gray" />
+            <Ionicons name="bicycle-outline" size={18} color="gray" />
             <Text className="text-gray-500 ml-2">Mark as Out for Delivery</Text>
           </Pressable>
 

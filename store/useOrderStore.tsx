@@ -2,10 +2,11 @@ import { create } from "zustand";
 
 export type OrderStatus =
   | "pending"
+  | "accepted"
   | "preparing"
+  | "cancelled"
   | "out_for_delivery"
-  | "delivered"
-  | "cancelled";
+  | "delivered";
 
 export interface OrderItem {
   productId: string;
@@ -17,10 +18,14 @@ export interface OrderItem {
 }
 
 export interface Order {
+  user: {
+    id: string;
+    name: string;
+    contact: string;
+  };
   id: string;
-  userId: string;
   items: OrderItem[];
-  username: string;
+
   pricing: {
     subtotal: number;
     tax: number;
