@@ -9,25 +9,17 @@ type Props = {
   currentStatus: OrderStatus;
   onChangeStatus: (id: string, status: OrderStatus) => void;
 };
-
 export default function StatusSelectDropdown({
   orderId,
   currentStatus,
   onChangeStatus,
 }: Props) {
   const [open, setOpen] = useState(false);
-
-  //const options = orderActions[currentStatus] || [];
   const options = Object.values(orderActions).flat();
-  // const selectedLabel =
-  //   options.find((o) => o.nextStatus === currentStatus)?.label ||
-  //   "Select Status";
-
   const handleSelect = (status: OrderStatus) => {
     onChangeStatus(orderId, status);
     setOpen(false);
   };
-
   return (
     <View className="bg-white rounded-xl">
       {/* SELECT BOX */}
@@ -52,7 +44,6 @@ export default function StatusSelectDropdown({
         <View className="bg-gray-100 mt-2 rounded-xl overflow-hidden">
           {options.map((item) => {
             const isSelected = item.nextStatus === currentStatus;
-
             return (
               <Pressable
                 key={item.key}

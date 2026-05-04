@@ -1,58 +1,41 @@
-import { useSignIn } from "@clerk/expo";
-import { type Href, Link, useRouter } from "expo-router";
+import { useAuth, useSignIn } from "@clerk/expo";
+import { Link, useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+
 export default function Page() {
   const { signIn, errors, fetchStatus } = useSignIn();
   const router = useRouter();
+  const { isSignedIn } = useAuth();
 
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [code, setCode] = React.useState("");
+
+  const isLoading = fetchStatus === "fetching";
+  const isDisabled = !emailAddress || !password || isLoading;
 
   const handleSubmit = async () => {
     const { error } = await signIn.password({
       emailAddress,
       password,
     });
+
     if (error) {
       console.error(JSON.stringify(error, null, 2));
       return;
     }
 
     if (signIn.status === "complete") {
-      await signIn.finalize({
-        navigate: ({ session, decorateUrl }) => {
-          if (session?.currentTask) {
-            // Handle pending session tasks
-            // See https://clerk.com/docs/guides/development/custom-flows/authentication/session-tasks
-            console.log(session?.currentTask);
-            return;
-          }
-
-          const url = decorateUrl("/");
-          if (url.startsWith("http")) {
-            window.location.href = url;
-          } else {
-            router.push(url as Href);
-          }
-        },
-      });
-    } else if (signIn.status === "needs_second_factor") {
-      // See https://clerk.com/docs/guides/development/custom-flows/authentication/multi-factor-authentication
-    } else if (signIn.status === "needs_client_trust") {
-      // For other second factor strategies,
-      // see https://clerk.com/docs/guides/development/custom-flows/authentication/client-trust
-      const emailCodeFactor = signIn.supportedSecondFactors.find(
-        (factor) => factor.strategy === "email_code",
-      );
-
-      if (emailCodeFactor) {
-        await signIn.mfa.sendEmailCode();
-      }
-    } else {
-      // Check why the sign-in is not complete
-      console.error("Sign-in attempt not complete:", signIn);
+      setTimeout(() => {
+        router.replace("/(tabs)");
+      }, 100);
     }
   };
 
@@ -60,194 +43,121 @@ export default function Page() {
     await signIn.mfa.verifyEmailCode({ code });
 
     if (signIn.status === "complete") {
-      await signIn.finalize({
-        navigate: ({ session, decorateUrl }) => {
-          if (session?.currentTask) {
-            // Handle pending session tasks
-            // See https://clerk.com/docs/guides/development/custom-flows/authentication/session-tasks
-            console.log(session?.currentTask);
-            return;
-          }
-
-          const url = decorateUrl("/");
-          if (url.startsWith("http")) {
-            window.location.href = url;
-          } else {
-            router.push(url as Href);
-          }
-        },
-      });
-    } else {
-      // Check why the sign-in is not complete
-      console.error("Sign-in attempt not complete:", signIn);
+      setTimeout(() => {
+        router.replace("/(tabs)");
+      }, 100);
     }
   };
 
-  if (signIn.status === "needs_client_trust") {
+  // 🔐 MFA SCREEN
+  if (signIn.status === "needs_second_factor") {
     return (
-      <View style={styles.container}>
+      <View className="flex-1 p-5 gap-3 bg-white">
         <Text className="text-2xl font-bold">Verify your account</Text>
+
         <TextInput
-          style={styles.input}
           value={code}
-          placeholder="Enter your verification code"
-          placeholderTextColor="#666666"
-          onChangeText={(code) => setCode(code)}
+          placeholder="Enter verification code"
           keyboardType="numeric"
+          onChangeText={setCode}
+          className="border border-gray-300 rounded-lg p-3 text-base bg-white"
         />
+
         {errors.fields.code && (
-          <Text style={styles.error}>{errors.fields.code.message}</Text>
+          <Text className="text-red-500 text-sm">
+            {errors.fields.code.message}
+          </Text>
         )}
+
         <Pressable
-          style={({ pressed }) => [
-            styles.button,
-            fetchStatus === "fetching" && styles.buttonDisabled,
-            pressed && styles.buttonPressed,
-          ]}
           onPress={handleVerify}
-          disabled={fetchStatus === "fetching"}
+          disabled={isLoading}
+          className={`p-4 rounded-xl flex-row justify-center items-center ${
+            isLoading ? "bg-gray-400" : "bg-blue-600"
+          }`}
         >
-          <Text style={styles.buttonText}>Verify</Text>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text className="text-white font-semibold">Verify</Text>
+          )}
         </Pressable>
+
         <Pressable
-          style={({ pressed }) => [
-            styles.secondaryButton,
-            pressed && styles.buttonPressed,
-          ]}
           onPress={() => signIn.mfa.sendEmailCode()}
+          className="p-3 items-center"
         >
-          <Text style={styles.secondaryButtonText}>I need a new code</Text>
+          <Text className="text-blue-600 font-semibold">I need a new code</Text>
         </Pressable>
-        <Pressable
-          style={({ pressed }) => [
-            styles.secondaryButton,
-            pressed && styles.buttonPressed,
-          ]}
-          onPress={() => signIn.reset()}
-        >
-          <Text style={styles.secondaryButtonText}>Start over</Text>
+
+        <Pressable onPress={() => signIn.reset()} className="p-3 items-center">
+          <Text className="text-gray-600 font-semibold">Start over</Text>
         </Pressable>
       </View>
     );
   }
 
+  // 🔑 LOGIN SCREEN
   return (
-    <View style={styles.container}>
+    <View className="flex-1 p-5 gap-3 bg-white">
       <Text className="text-2xl font-bold">Sign in</Text>
 
-      <Text style={styles.label}>Email address</Text>
+      {/* EMAIL */}
+      <Text className="font-semibold">Email address</Text>
       <TextInput
-        style={styles.input}
-        autoCapitalize="none"
         value={emailAddress}
         placeholder="Enter email"
-        placeholderTextColor="#666666"
-        onChangeText={(emailAddress) => setEmailAddress(emailAddress)}
         keyboardType="email-address"
+        autoCapitalize="none"
+        onChangeText={setEmailAddress}
+        className="border border-gray-300 rounded-lg p-3 text-base bg-white"
       />
       {errors.fields.identifier && (
-        <Text style={styles.error}>{errors.fields.identifier.message}</Text>
+        <Text className="text-red-500 text-sm">
+          {errors.fields.identifier.message}
+        </Text>
       )}
-      <Text style={styles.label}>Password</Text>
+
+      {/* PASSWORD */}
+      <Text className="font-semibold">Password</Text>
       <TextInput
-        style={styles.input}
         value={password}
         placeholder="Enter password"
-        placeholderTextColor="#666666"
-        secureTextEntry={true}
-        onChangeText={(password) => setPassword(password)}
+        secureTextEntry
+        onChangeText={setPassword}
+        className="border border-gray-300 rounded-lg p-3 text-base bg-white"
       />
       {errors.fields.password && (
-        <Text style={styles.error}>{errors.fields.password.message}</Text>
+        <Text className="text-red-500 text-sm">
+          {errors.fields.password.message}
+        </Text>
       )}
+
+      {/* LOGIN BUTTON */}
       <Pressable
-        style={({ pressed }) => [
-          styles.button,
-          (!emailAddress || !password || fetchStatus === "fetching") &&
-            styles.buttonDisabled,
-          pressed && styles.buttonPressed,
-        ]}
         onPress={handleSubmit}
-        disabled={!emailAddress || !password || fetchStatus === "fetching"}
+        disabled={isDisabled}
+        className={`p-4 rounded-xl flex-row justify-center items-center ${
+          isDisabled ? "bg-gray-400" : "bg-blue-600"
+        }`}
       >
-        {/* <Text className="text-black text-3xl">Continue</Text> */}
-        <Text className="text-xl text-black">Continue</Text>
+        {isLoading ? (
+          <>
+            <ActivityIndicator color="#fff" />
+            <Text className="text-white ml-2 font-semibold">Loading...</Text>
+          </>
+        ) : (
+          <Text className="text-white font-semibold">Login</Text>
+        )}
       </Pressable>
 
-      <View style={styles.linkContainer}>
+      {/* SIGN UP */}
+      <View className="flex-row mt-4">
         <Text>Don't have an account? </Text>
         <Link href="/sign-up">
-          <Text className="text-blue-500 underline">Sign up</Text>{" "}
+          <Text className="text-blue-600 underline font-semibold">Sign up</Text>
         </Link>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    gap: 12,
-  },
-  title: {
-    marginBottom: 8,
-  },
-  label: {
-    fontWeight: "600",
-    fontSize: 14,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 16,
-    backgroundColor: "#fff",
-  },
-  button: {
-    backgroundColor: "#0a7ea4",
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  buttonPressed: {
-    opacity: 0.7,
-  },
-  buttonDisabled: {
-    opacity: 0.5,
-  },
-  buttonText: {
-    color: "#fff",
-    fontWeight: "600",
-  },
-  secondaryButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 8,
-  },
-  secondaryButtonText: {
-    color: "#0a7ea4",
-    fontWeight: "600",
-  },
-  linkContainer: {
-    flexDirection: "row",
-    gap: 4,
-    marginTop: 12,
-    alignItems: "center",
-  },
-  error: {
-    color: "#d32f2f",
-    fontSize: 12,
-    marginTop: -8,
-  },
-  debug: {
-    fontSize: 10,
-    opacity: 0.5,
-    marginTop: 8,
-  },
-});

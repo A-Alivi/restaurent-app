@@ -1,6 +1,5 @@
-import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import SearchBar from "./ui/SearchBar";
 
 type Props = {
@@ -22,12 +21,12 @@ const ListHeader = ({ onAddPress }: Props) => {
       <View className="flex-row gap-2 mb-4">
         <SearchBar />
 
-        <Pressable
+        {/* <Pressable
           onPress={onAddPress}
           className="bg-red-600 px-3 rounded-xl justify-center"
         >
           <Ionicons name="add-outline" size={19} color="white" />
-        </Pressable>
+        </Pressable> */}
       </View>
     </View>
   );

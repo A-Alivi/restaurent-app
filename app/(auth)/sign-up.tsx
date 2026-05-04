@@ -1,7 +1,14 @@
 import { useAuth, useSignUp } from "@clerk/expo";
 import { type Href, Link, useRouter } from "expo-router";
 import React from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function Page() {
   const { signUp, errors, fetchStatus } = useSignUp();
@@ -139,8 +146,19 @@ export default function Page() {
         ]}
         onPress={handleSubmit}
         disabled={!emailAddress || !password || fetchStatus === "fetching"}
+        className={`p-4 rounded-xl flex-row justify-center items-center ${
+          fetchStatus === "fetching" ? "bg-gray-400" : "bg-blue-600"
+        }`}
       >
-        <Text style={styles.buttonText}>Sign up</Text>
+        {fetchStatus === "fetching" ? (
+          <>
+            <ActivityIndicator color="#fff" />
+            <Text className="text-white ml-2 font-semibold">Loading...</Text>
+          </>
+        ) : (
+          <Text className="text-white font-semibold">Sign up</Text>
+        )}
+        {/* <Text style={styles.buttonText}>Sign up</Text> */}
       </Pressable>
       <View style={styles.linkContainer}>
         <Text>Already have an account? </Text>

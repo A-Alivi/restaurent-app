@@ -1,8 +1,7 @@
 // import { View, Text, Pressable, FlatList } from "react-native";
-import AddOrderModal from "@/components/order/add-order-modal";
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import { FlatList, View } from "react-native";
+import React, { useState } from "react";
+import { FlatList, RefreshControl, View } from "react-native";
 import ListHeader from "../../components/ListHeader";
 import OrderCard from "../../components/order/OrderCard";
 import { useOrderStore } from "../../store/useOrderStore";
@@ -12,11 +11,25 @@ export default function HomeScreen() {
   const orderStore = useOrderStore();
   const orders = orderStore.orders;
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = async () => {
+    setRefreshing(true);
 
+    try {
+      orderStore.setOrders; // or refetch single order
+    } catch (e) {
+      console.log(e);
+    }
+
+    setRefreshing(false);
+  };
   return (
     <View className="flex-1 bg-[#f5efec] px-4 pt-4">
       {/* FlatList */}
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         data={orders}
         keyExtractor={(order: any) => order.id}
         ListHeaderComponent={
@@ -24,15 +37,15 @@ export default function HomeScreen() {
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
-        renderItem={(order: any) => <OrderCard order={order} />}
+        renderItem={({ item }) => <OrderCard order={item} />}
       />
-      <AddOrderModal
+      {/* <AddOrderModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         onSubmit={(order) => {
           orderStore.addOrder(order);
         }}
-      />
+      /> */}
     </View>
   );
 }
