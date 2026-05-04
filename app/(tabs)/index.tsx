@@ -39,7 +39,6 @@ export default function HomeScreen() {
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
-        // renderItem={() => <Item title="Hakeem" />}
         renderItem={({ item }) => <OrderCard order={item} />}
       />
 
