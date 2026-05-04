@@ -1,8 +1,9 @@
 // import { View, Text, Pressable, FlatList } from "react-native";
+import ListHeader from "@/components/ListHeader";
 import OrderCard from "@/components/order/OrderCard";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { FlatList, RefreshControl, View } from "react-native";
 import { useOrderStore } from "../../store/useOrderStore";
 
 export default function HomeScreen() {
@@ -27,7 +28,7 @@ export default function HomeScreen() {
   return (
     <View className="flex-1 bg-[#f5efec] px-4 pt-4">
       {/* FlatList */}
-      {/* <FlatList
+      <FlatList
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -40,10 +41,8 @@ export default function HomeScreen() {
         contentContainerStyle={{ paddingBottom: 20 }}
         // renderItem={() => <Item title="Hakeem" />}
         renderItem={({ item }) => <OrderCard order={item} />}
-      /> */}
-      <ScrollView>
-        <OrderCard order={orders} />
-      </ScrollView>
+      />
+
       {/* <AddOrderModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
@@ -54,10 +53,3 @@ export default function HomeScreen() {
     </View>
   );
 }
-type ItemProps = { title: string };
-
-const Item = ({ title }: ItemProps) => (
-  <View className="flex-1">
-    <Text className="text-xl font-bold">{title}</Text>
-  </View>
-);
