@@ -1,4 +1,5 @@
 import ActionsDropdown from "@/components/order/ActionsDropdown";
+import StatusBadge from "@/components/ui/StatusBadge";
 import { statusColors } from "@/utils/statusColors";
 import { Ionicons } from "@expo/vector-icons";
 import { formatDistanceToNow } from "date-fns";
@@ -36,10 +37,9 @@ const OrderDetailScreen = () => {
           <View className="bg-[#f3d6cc] self-start px-4 py-2 rounded-full mb-4">
             <Text className="text-[#b23a1a] font-semibold">NEW ORDER</Text>
           </View>
-          <View
-            className={`bg-${statusColor[item?.status || ""]} self-start px-4 py-2 rounded-full mb-4`}
-          >
-            <Text className="text-[#b23a1a] font-semibold">{item?.status}</Text>
+
+          <View className={` self-start px-4 py-2 rounded-full mb-4`}>
+            <StatusBadge status={item?.status ?? ""} />
           </View>
         </View>
         {/* Order Items Card */}
