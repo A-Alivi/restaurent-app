@@ -13,7 +13,7 @@ export default function OrderCard({ order }: any) {
   const borderColor: any = {
     pending: "border-orange-400",
     preparing: "border-blue-400",
-    delivering: "border-orange-300",
+    out_for_delivery: "border-orange-300",
     delivered: "border-green-400",
     cancelled: "border-red-400",
   };
@@ -31,25 +31,25 @@ export default function OrderCard({ order }: any) {
     (sum: number, item: any) => sum + (item.price || 0),
     0,
   );
-
+  console.log("Orders", order);
   return (
     <View
       className={`bg-white rounded-2xl p-4 mb-4 border-t-4 ${
-        borderColor[order?.status] || "border-gray-300"
+        borderColor[order.status] || "border-gray-300"
       }`}
     >
       {/* HEADER */}
       <View className="flex-row justify-between items-center">
         <View>
-          <Text className="text-xl font-bold">{order?.id}</Text>
-          <Text className="text-gray-500">{order?.username}</Text>
+          <Text className="text-xl font-bold">{order.id}</Text>
+          <Text className="text-gray-500">{order.username}</Text>
         </View>
 
         <View>
           <View className="flex-row py-2 items-center">
             <Ionicons name="timer-outline" size={18} />
             <Text className="text-gray-400 ml-1">
-              {order?.timestamps?.updatedAt
+              {order.timestamps.updatedAt
                 ? formatDistanceToNow(new Date(order.timestamps.updatedAt), {
                     addSuffix: true,
                   })
@@ -57,13 +57,13 @@ export default function OrderCard({ order }: any) {
             </Text>
           </View>
 
-          <StatusBadge status={order?.status || "pending"} />
+          <StatusBadge status={order.status} />
         </View>
       </View>
 
       {/* ITEMS */}
       <View className="mt-3 border-t border-b border-gray-200 pt-2">
-        {order?.items?.map((item: any, i: number) => (
+        {order.items?.map((item: any, i: number) => (
           <OrderItemRow key={i} item={item} />
         ))}
       </View>
@@ -73,7 +73,7 @@ export default function OrderCard({ order }: any) {
         <Text className="text-lg font-semibold">Rs.{total || 0}</Text>
 
         {/* ACTIONS */}
-        {order?.status === "pending" ? (
+        {order.status === "pending" ? (
           <View className="flex-row gap-2">
             <Pressable
               className="border px-3 py-1 rounded-lg"

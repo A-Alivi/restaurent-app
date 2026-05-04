@@ -32,7 +32,7 @@ export const orderActions: Record<OrderStatus, Action[]> = {
   preparing: [
     {
       key: "delivery",
-      label: "Mark as Out for Delivery",
+      label: "Out for Delivery",
       icon: "car-outline",
       type: "disabled",
       nextStatus: "out_for_delivery",
@@ -42,13 +42,12 @@ export const orderActions: Record<OrderStatus, Action[]> = {
   out_for_delivery: [
     {
       key: "delivered",
-      label: "Mark as Delivered",
+      label: "Delivered",
       icon: "checkmark-done-outline",
       type: "disabled",
       nextStatus: "delivered",
     },
   ],
-
   delivered: [],
   cancelled: [],
 };

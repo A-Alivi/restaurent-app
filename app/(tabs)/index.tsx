@@ -1,9 +1,9 @@
 // import { View, Text, Pressable, FlatList } from "react-native";
+import OrderCard from "@/components/order/OrderCard";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { FlatList, RefreshControl, View } from "react-native";
+import { FlatList, RefreshControl, Text, View } from "react-native";
 import ListHeader from "../../components/ListHeader";
-import OrderCard from "../../components/order/OrderCard";
 import { useOrderStore } from "../../store/useOrderStore";
 
 export default function HomeScreen() {
@@ -16,13 +16,15 @@ export default function HomeScreen() {
     setRefreshing(true);
 
     try {
-      orderStore.setOrders; // or refetch single order
+      orders; // or refetch single order
+      console.log("Orders on refresh", orders);
     } catch (e) {
       console.log(e);
     }
 
     setRefreshing(false);
   };
+  console.log("orders in index", orders);
   return (
     <View className="flex-1 bg-[#f5efec] px-4 pt-4">
       {/* FlatList */}
@@ -37,6 +39,7 @@ export default function HomeScreen() {
         }
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 20 }}
+        // renderItem={() => <Item title="Hakeem" />}
         renderItem={({ item }) => <OrderCard order={item} />}
       />
       {/* <AddOrderModal
@@ -49,3 +52,10 @@ export default function HomeScreen() {
     </View>
   );
 }
+type ItemProps = { title: string };
+
+const Item = ({ title }: ItemProps) => (
+  <View className="flex-1">
+    <Text className="text-xl font-bold">{title}</Text>
+  </View>
+);
