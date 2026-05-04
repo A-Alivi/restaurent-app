@@ -1,4 +1,4 @@
-import { OrderStatus } from "../store/useOrderStore";
+import { OrderStatus } from "../models/orders";
 type Action = {
   key: string;
   label: string;
@@ -6,6 +6,7 @@ type Action = {
   type: string;
   nextStatus: OrderStatus;
 };
+type ActionType = "primary" | "outline" | "disabled";
 
 export const orderActions: Record<OrderStatus, Action[]> = {
   pending: [
@@ -49,4 +50,5 @@ export const orderActions: Record<OrderStatus, Action[]> = {
   ],
 
   delivered: [],
+  cancelled: [],
 };

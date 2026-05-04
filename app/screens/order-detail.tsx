@@ -1,19 +1,23 @@
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import ActionsDropdown from "@/components/order/ActionsDropdown";
+import { statusColors } from "@/utils/statusColors";
+import { Ionicons } from "@expo/vector-icons";
 import { formatDistanceToNow } from "date-fns";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { useOrderStore } from "../../store/useOrderStore";
 import getInitials from "../../utils/getInitials";
 const OrderDetailScreen = () => {
-  const { id } = useLocalSearchParams();
+  const params = useLocalSearchParams();
+  const id = Array.isArray(params.id) ? params.id[0] : params.id;
+
   console.log("ID", id);
   const orderStore = useOrderStore();
   const orderPlacedAt = "";
   let totalPrice = 0;
-  const item = orderStore?.orders.find((order) => order.id === id);
+  const item = orderStore?.orders.find((order: any) => order.id === id);
   item?.items?.forEach((item: any) => (totalPrice = totalPrice + item.price));
-  console.log(item?.user.name);
+  const statusColor = statusColors;
   return (
     <View className="flex-1 bg-[#f5efec]">
       <ScrollView className="p-4">
@@ -27,12 +31,17 @@ const OrderDetailScreen = () => {
               })
             : ""}
         </Text>
-
-        {/* Status Badge */}
-        <View className="bg-[#f3d6cc] self-start px-4 py-2 rounded-full mb-4">
-          <Text className="text-[#b23a1a] font-semibold">● NEW ORDER</Text>
+        {/* Status Badge */}{" "}
+        <View className="flex-row justify-between">
+          <View className="bg-[#f3d6cc] self-start px-4 py-2 rounded-full mb-4">
+            <Text className="text-[#b23a1a] font-semibold">NEW ORDER</Text>
+          </View>
+          <View
+            className={`bg-${statusColor[item?.status || ""]} self-start px-4 py-2 rounded-full mb-4`}
+          >
+            <Text className="text-[#b23a1a] font-semibold">{item?.status}</Text>
+          </View>
         </View>
-
         {/* Order Items Card */}
         <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
           <View className="flex-row items-center mb-3">
@@ -76,7 +85,6 @@ const OrderDetailScreen = () => {
             </Text>
           </View>
         </View>
-
         {/* Customer Card */}
         <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
           <View className="flex-row items-center mb-3">
@@ -104,9 +112,8 @@ const OrderDetailScreen = () => {
             <Text>{item?.delivery.city}</Text>
           </View>
         </View>
-
         {/* Actions */}
-        <View className="bg-[#f3d6cc] p-4 rounded-2xl">
+        {/* <View className="bg-[#f3d6cc] p-4 rounded-2xl">
           <Text className="text-gray-600 mb-3 font-semibold">
             UPDATE STATUS
           </Text>
@@ -132,7 +139,15 @@ const OrderDetailScreen = () => {
             <Ionicons name="checkmark-done-outline" size={18} color="gray" />
             <Text className="text-gray-500 ml-2">Mark as Delivered</Text>
           </Pressable>
-        </View>
+        </View> */}
+        <ActionsDropdown
+          orderId={id}
+          currentStatus={item?.status ?? "pending"}
+          onChangeStatus={(id, status) => {
+            console.log("Selected status:", status);
+            orderStore.updateOrderStatus(id, status);
+          }}
+        />
       </ScrollView>
     </View>
   );

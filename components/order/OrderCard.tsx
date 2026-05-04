@@ -2,7 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { formatDistanceToNow } from "date-fns";
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
-import { OrderStatus, useOrderStore } from "../../store/useOrderStore";
+import { OrderStatus } from "../../models/orders";
+import { useOrderStore } from "../../store/useOrderStore";
 import StatusBadge from "../ui/StatusBadge";
 import OrderItemRow from "./OrderItemRow";
 

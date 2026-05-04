@@ -1,4 +1,3 @@
-// models/Notification.ts
 export type NotificationType = "order" | "payment" | "inquiry" | "system";
 
 export interface Notification {

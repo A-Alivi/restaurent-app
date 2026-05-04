@@ -1,21 +1,12 @@
 // screens/NotificationScreen.tsx
-import React, { useState } from "react";
+import { useNotificationStore } from "@/store/useNotificationStore";
+import React from "react";
 import { FlatList, Pressable, Text, View } from "react-native";
 import Header from "../../components/notification/Header";
 import NotificationCard from "../../components/notification/NotificationCard";
-import { notificationsData } from "../../data/notification";
-import { Notification } from "../models/notification";
 
 const NotificationScreen = () => {
-  const [data, setData] = useState<Notification[]>(notificationsData);
-
-  const markAllRead = () => {
-    const updated = data.map((item) => ({
-      ...item,
-      isRead: true,
-    }));
-    setData(updated);
-  };
+  const { notifications, markAllRead } = useNotificationStore();
 
   return (
     <View className="flex-1 bg-gray-100">
@@ -35,7 +26,7 @@ const NotificationScreen = () => {
       </View>
 
       <FlatList
-        data={data}
+        data={notifications}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ padding: 16 }}
         renderItem={({ item }) => (
