@@ -23,7 +23,7 @@ export const orderActions: Record<OrderStatus, Action[]> = {
     {
       key: "prepare",
       label: "Start Preparing",
-      icon: "ramen-dining",
+      icon: "restaurant-outline",
       type: "outline",
       nextStatus: "preparing",
     },
