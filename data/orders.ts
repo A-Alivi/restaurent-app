@@ -1,4 +1,4 @@
-import { Order } from "../store/useOrderStore";
+import { Order } from "../models/orders";
 
 export const orders: Order[] = [
   {
@@ -159,7 +159,7 @@ export const orders: Order[] = [
       },
     ],
     pricing: { subtotal: 700, tax: 70, deliveryFee: 100, total: 870 },
-    status: "cancelled",
+    status: "accepted",
     payment: { method: "card", status: "failed" },
     delivery: { address: "Gulraiz Housing Scheme", city: "Rawalpindi" },
     timestamps: {
