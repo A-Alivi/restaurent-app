@@ -28,6 +28,16 @@ const ListHeader = ({ onAddPress }: Props) => {
           <Ionicons name="add-outline" size={19} color="white" />
         </Pressable> */}
       </View>
+      {/* <View className="flex-row justify-evenly py-3 bg-gray-50 rounded-xl my-2">
+        <Pressable>
+          <Text className="text-sm font-semibold">All</Text>
+        </Pressable>
+        <Text className="text-sm font-semibold">pending</Text>
+
+        <Text className="text-sm font-semibold">preparing</Text>
+        <Text className="text-sm font-semibold">out_for_delivery</Text>
+        <Text className="text-sm font-semibold">delivered</Text>
+      </View> */}
     </View>
   );
 };
