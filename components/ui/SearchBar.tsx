@@ -16,7 +16,7 @@ export default function SearchBar() {
       <Ionicons name="search" size={18} color="gray" />
       <TextInput
         value={search}
-        onChangeText={() => setSearch}
+        onChangeText={setSearch}
         placeholder="Search order ID..."
         className="flex-1 mx-3 text-black"
         placeholderTextColor="#888"

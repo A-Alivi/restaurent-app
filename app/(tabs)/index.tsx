@@ -4,7 +4,7 @@ import OrderCard from "@/components/order/OrderCard";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, RefreshControl, View } from "react-native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useOrderStore } from "../../store/useOrderStore";
 export default function HomeScreen() {
   const router = useRouter();
@@ -26,36 +26,34 @@ export default function HomeScreen() {
   };
   console.log("orders in index", orders);
   return (
-    <SafeAreaProvider>
-      <SafeAreaView>
-        <View className="flex-1 bg-[#f5efec] px-4 pt-4">
-          {/* FlatList */}
-          <FlatList
-            className="flex-1"
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            data={orders}
-            keyExtractor={(order: any) => order.id}
-            ListHeaderComponent={
-              <ListHeader onAddPress={() => setModalVisible(true)} />
-            }
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 20 }}
-            renderItem={({ item }) => {
-              return <OrderCard order={item} />;
-            }}
-          />
+    <SafeAreaView>
+      <View className="flex-1 bg-[#f5efec] px-4 pt-4">
+        {/* FlatList */}
+        <FlatList
+          className="flex-1"
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          data={orders}
+          keyExtractor={(order: any) => order.id}
+          ListHeaderComponent={
+            <ListHeader onAddPress={() => setModalVisible(true)} />
+          }
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 20 }}
+          renderItem={({ item }) => {
+            return <OrderCard order={item} />;
+          }}
+        />
 
-          {/* <AddOrderModal
+        {/* <AddOrderModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         onSubmit={(order) => {
           orderStore.addOrder(order);
         }}
       /> */}
-        </View>
-      </SafeAreaView>
-    </SafeAreaProvider>
+      </View>
+    </SafeAreaView>
   );
 }
