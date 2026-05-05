@@ -42,24 +42,10 @@ export default function HomeScreen() {
             }
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 20 }}
-            renderItem={(order: any) => {
-              return <OrderCard order={order} />;
+            renderItem={({ item }) => {
+              return <OrderCard order={item} />;
             }}
           />
-
-          {/* <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 20 }}
-      >
-        <ListHeader onAddPress={() => setModalVisible(true)} />
-
-        {orders.map((item: any) => (
-          <OrderCard key={item.id} order={item} />
-        ))}
-      </ScrollView> */}
 
           {/* <AddOrderModal
         visible={modalVisible}

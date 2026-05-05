@@ -9,7 +9,6 @@ import OrderItemRow from "./OrderItemRow";
 export default function OrderCard({ order }: any) {
   const router = useRouter();
   const orderStore = useOrderStore();
-
   const borderColor: any = {
     pending: "border-orange-400",
     preparing: "border-blue-400",
