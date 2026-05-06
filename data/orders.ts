@@ -167,4 +167,182 @@ export const orders: Order[] = [
       updatedAt: "2026-04-27T07:45:00Z",
     },
   },
+  {
+    id: "ord_006",
+    user: {
+      id: "user_106",
+      name: "Bilal Ahmed",
+      contact: "0306-6789012",
+    },
+    items: [
+      {
+        productId: "p10",
+        name: "BBQ Platter",
+        quantity: 1,
+        price: 2200,
+        total: 2200,
+        note: "Extra sauce",
+      },
+    ],
+    pricing: { subtotal: 2200, tax: 220, deliveryFee: 150, total: 2570 },
+    status: "pending",
+    payment: { method: "cash", status: "pending" },
+    delivery: { address: "PWD Housing Society", city: "Islamabad" },
+    timestamps: {
+      createdAt: "2026-04-27T11:15:00Z",
+      updatedAt: "2026-04-27T11:15:00Z",
+    },
+  },
+
+  {
+    id: "ord_007",
+    user: {
+      id: "user_107",
+      name: "Ayesha Noor",
+      contact: "0307-7890123",
+    },
+    items: [
+      {
+        productId: "p11",
+        name: "Club Sandwich",
+        quantity: 2,
+        price: 400,
+        total: 800,
+        note: "",
+      },
+      {
+        productId: "p12",
+        name: "Tea",
+        quantity: 2,
+        price: 120,
+        total: 240,
+        note: "Less sugar",
+      },
+    ],
+    pricing: { subtotal: 1040, tax: 104, deliveryFee: 80, total: 1224 },
+    status: "preparing",
+    payment: { method: "cash", status: "pending" },
+    delivery: { address: "Commercial Market", city: "Rawalpindi" },
+    timestamps: {
+      createdAt: "2026-04-27T10:50:00Z",
+      updatedAt: "2026-04-27T11:00:00Z",
+    },
+  },
+
+  {
+    id: "ord_008",
+    user: {
+      id: "user_108",
+      name: "Faizan Sheikh",
+      contact: "0308-8901234",
+    },
+    items: [
+      {
+        productId: "p13",
+        name: "Biryani",
+        quantity: 3,
+        price: 300,
+        total: 900,
+        note: "Spicy",
+      },
+    ],
+    pricing: { subtotal: 900, tax: 90, deliveryFee: 100, total: 1090 },
+    status: "cancelled",
+    payment: { method: "online", status: "refunded" },
+    delivery: { address: "Saddar", city: "Rawalpindi" },
+    timestamps: {
+      createdAt: "2026-04-27T09:00:00Z",
+      updatedAt: "2026-04-27T09:20:00Z",
+    },
+  },
+
+  {
+    id: "ord_009",
+    user: {
+      id: "user_109",
+      name: "Zainab Fatima",
+      contact: "0309-9012345",
+    },
+    items: [
+      {
+        productId: "p14",
+        name: "Ice Cream",
+        quantity: 2,
+        price: 200,
+        total: 400,
+        note: "",
+      },
+      {
+        productId: "p15",
+        name: "Brownie",
+        quantity: 1,
+        price: 300,
+        total: 300,
+        note: "Warm",
+      },
+    ],
+    pricing: { subtotal: 700, tax: 70, deliveryFee: 80, total: 850 },
+    status: "delivered",
+    payment: { method: "card", status: "paid" },
+    delivery: { address: "G-11 Markaz", city: "Islamabad" },
+    timestamps: {
+      createdAt: "2026-04-26T18:30:00Z",
+      updatedAt: "2026-04-26T19:00:00Z",
+      deliveredAt: "2026-04-26T19:00:00Z",
+    },
+  },
+
+  {
+    id: "ord_010",
+    user: {
+      id: "user_110",
+      name: "Hamza Saeed",
+      contact: "0310-0123456",
+    },
+    items: [
+      {
+        productId: "p16",
+        name: "Chicken Shawarma",
+        quantity: 4,
+        price: 250,
+        total: 1000,
+        note: "Extra garlic sauce",
+      },
+    ],
+    pricing: { subtotal: 1000, tax: 100, deliveryFee: 120, total: 1220 },
+    status: "out_for_delivery",
+    payment: { method: "cash", status: "pending" },
+    delivery: { address: "Scheme 1 Road", city: "Rawalpindi" },
+    timestamps: {
+      createdAt: "2026-04-27T10:10:00Z",
+      updatedAt: "2026-04-27T10:40:00Z",
+    },
+  },
+
+  {
+    id: "ord_011",
+    user: {
+      id: "user_111",
+      name: "Mariam Khan",
+      contact: "0311-1234567",
+    },
+    items: [
+      {
+        productId: "p17",
+        name: "Grilled Chicken",
+        quantity: 1,
+        price: 950,
+        total: 950,
+        note: "",
+      },
+    ],
+    pricing: { subtotal: 950, tax: 95, deliveryFee: 100, total: 1145 },
+    status: "accepted",
+    payment: { method: "online", status: "paid" },
+    delivery: { address: "F-10 Sector", city: "Islamabad" },
+    timestamps: {
+      createdAt: "2026-04-27T12:00:00Z",
+      updatedAt: "2026-04-27T12:10:00Z",
+    },
+  },
 ];

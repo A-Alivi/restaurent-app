@@ -11,7 +11,6 @@ interface Props {
 const NotificationCard = ({ item, onPress, onAction }: Props) => {
   const isOrder = item.type === "order";
   const isInquiry = item.type === "inquiry";
-
   return (
     <Pressable
       onPress={onPress}

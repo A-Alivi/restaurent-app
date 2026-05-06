@@ -2,18 +2,17 @@ import ListHeader from "@/components/ListHeader";
 import OrderCard from "@/components/OrderCard";
 import SearchBar from "@/components/SearchBar";
 import StatusFilters from "@/components/StatusFilters";
-import { orders } from "@/data/orders";
 import { useOrderStore } from "@/store/useOrderStore";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, View } from "react-native";
 export default function OrdersScreen() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  const setOrder = useOrderStore((state) => state.setOrders);
-  useEffect(() => {
-    setOrder(orders);
-  }, []);
-
+  // const setOrder = useOrderStore((state) => state.setOrders);
+  // useEffect(() => {
+  //   setOrder(orders);
+  // }, []);
+  const orders = useOrderStore((state) => state.orders);
   const filteredOrders = orders.filter((order) => {
     const matchSearch = order.id.toLowerCase().includes(search.toLowerCase());
     const matchStatus = status === "all" ? true : order.status === status;

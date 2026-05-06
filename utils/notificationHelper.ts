@@ -1,11 +1,21 @@
 import * as Notifications from "expo-notifications";
 
-export async function sendNewOrderNotification(orderId: string) {
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      title: "🆕 New Order Received",
-      body: `Order ${orderId} has been added`,
-    },
-    trigger: null, // instant notification
-  });
-}
+// First, set the handler that will cause the notification
+// to show the alert
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
+
+// Second, call scheduleNotificationAsync()
+Notifications.scheduleNotificationAsync({
+  content: {
+    title: "Look at that notification",
+    body: "I'm so proud of myself!",
+  },
+  trigger: null,
+});
