@@ -1,15 +1,11 @@
-// // utils/notificationHelpers.ts
-// import { Notification } from "@/models/notification";
+import * as Notifications from "expo-notifications";
 
-// export const createOrderNotification = (
-//   orderId: string,
-//   itemCount: number,
-// ): Notification => ({
-//   id: Date.now().toString(),
-//   type: "order",
-//   title: "New Order Received",
-//   message: `Order #${orderId} needs preparation. ${itemCount} items included.`,
-//   orderId,
-//   time: "Just now",
-//   isRead: false,
-// });
+export async function sendNewOrderNotification(orderId: string) {
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      title: "🆕 New Order Received",
+      body: `Order ${orderId} has been added`,
+    },
+    trigger: null, // instant notification
+  });
+}

@@ -41,7 +41,7 @@ export default function StatusSelectDropdown({
 
       {/* DROPDOWN */}
       {open && (
-        <View className="bg-gray-100 mt-2 rounded-xl overflow-hidden">
+        <View className="bg-white mt-2 rounded-xl overflow-hidden">
           {options.map((item) => {
             const isSelected = item.nextStatus === currentStatus;
             return (

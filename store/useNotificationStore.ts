@@ -1,5 +1,7 @@
 // store/useNotificationStore.ts
 import { Notification } from "@/models/notification";
+import * as Notifications from "expo-notifications";
+import { useEffect } from "react";
 import { create } from "zustand";
 
 interface NotificationState {
@@ -24,3 +26,8 @@ export const useNotificationStore = create<NotificationState>((set) => ({
       })),
     })),
 }));
+export function useNotificationSetup() {
+  useEffect(() => {
+    Notifications.requestPermissionsAsync();
+  }, []);
+}

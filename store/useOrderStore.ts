@@ -1,6 +1,5 @@
 import { OrderStatus, OrderStore } from "@/models/orders";
 import { create } from "zustand";
-
 export const useOrderStore = create<OrderStore>((set, get) => ({
   orders: [],
 

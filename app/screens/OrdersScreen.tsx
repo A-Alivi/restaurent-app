@@ -1,35 +1,39 @@
-import ListHeader from "@/components/ListHeader";
+import FloatingButton from "@/components/FloatingButton";
+import Header from "@/components/Header";
 import OrderCard from "@/components/OrderCard";
 import SearchBar from "@/components/SearchBar";
 import StatusFilters from "@/components/StatusFilters";
-import { orders } from "@/data/orders";
 import { useOrderStore } from "@/store/useOrderStore";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, View } from "react-native";
+
 export default function OrdersScreen() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  const setOrder = useOrderStore((state) => state.setOrders);
-  useEffect(() => {
-    setOrder(orders);
-  }, []);
+
+  const orders = useOrderStore((state) => state.orders);
 
   const filteredOrders = orders.filter((order) => {
     const matchSearch = order.id.toLowerCase().includes(search.toLowerCase());
+
     const matchStatus = status === "all" ? true : order.status === status;
+
     return matchSearch && matchStatus;
   });
 
   return (
-    <View className="flex-1 bg-orange-70 pt-12 px-4">
+    <View className="flex-1 bg-white pt-12 px-4">
+      {/* Header */}
+      <Header />
+
+      {/* Search */}
+      <SearchBar value={search} onChangeText={setSearch} />
+
+      {/* Filters */}
+      <StatusFilters selected={status} onSelect={setStatus} />
+
+      {/* List */}
       <FlatList
-        ListHeaderComponent={
-          <>
-            <ListHeader />
-            <SearchBar value={search} onChangeText={setSearch} />
-            <StatusFilters selected={status} onSelect={setStatus} />
-          </>
-        }
         data={filteredOrders}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
@@ -37,7 +41,8 @@ export default function OrdersScreen() {
         renderItem={({ item }) => <OrderCard order={item} />}
       />
 
-      {/* <FloatingButton /> */}
+      {/* Floating Button */}
+      <FloatingButton />
     </View>
   );
 }

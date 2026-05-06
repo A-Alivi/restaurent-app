@@ -2,13 +2,14 @@ import ActionsDropdown from "@/components/order/ActionsDropdown";
 import StatusBadge from "@/components/ui/StatusBadge";
 import { Ionicons } from "@expo/vector-icons";
 import { formatDistanceToNow } from "date-fns";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useOrderStore } from "../../store/useOrderStore";
 import getInitials from "../../utils/getInitials";
 const OrderDetailScreen = () => {
+  const router = useRouter();
   const params = useLocalSearchParams();
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
   const orderStore = useOrderStore();
@@ -17,10 +18,17 @@ const OrderDetailScreen = () => {
   item?.items?.forEach((item: any) => (totalPrice = totalPrice + item.price));
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-1 bg-[#f5efec]">
+      <View className="flex-1 bg-orange-70">
         <ScrollView className="p-4">
+          <Pressable
+            className="flex-row justify-self-auto"
+            onPress={() => router.back()}
+          >
+            <Ionicons name="arrow-back" size={20} />
+            <Text className="text-xl font-bold px-2">Go back</Text>
+          </Pressable>
           {/* Header */}
-          <Text className="text-3xl font-bold text-[#2b1a14] mb-1">{id}</Text>
+          <Text className="text-3xl font-bold text-indigo-600 mb-1">{id}</Text>
           <Text className="text-gray-500 mb-3">
             Placed{" "}
             {item?.timestamps?.updatedAt
@@ -29,20 +37,22 @@ const OrderDetailScreen = () => {
                 })
               : ""}
           </Text>
-          {/* Status Badge */}{" "}
-          <View className="flex-row justify-between">
-            <View className="bg-[#f3d6cc] self-start px-4 py-2 rounded-full mb-4">
-              <Text className="text-[#b23a1a] font-semibold">NEW ORDER</Text>
-            </View>
-            <View className={` self-start px-4 py-2 rounded-full mb-4`}>
-              <StatusBadge status={item?.status ?? ""} />
-            </View>
-          </View>
+
           {/* Order Items Card */}
           <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
-            <View className="flex-row items-center mb-3">
-              <Ionicons name="receipt-outline" size={20} color="#b23a1a" />
-              <Text className="ml-2 text-lg font-semibold">Order Items</Text>
+            <View className="flex-row justify-between mb-3">
+              <View className="flex-row">
+                <Ionicons
+                  className="mt-1"
+                  name="receipt-outline"
+                  size={20}
+                  color="#b23a1a"
+                />
+                <Text className="ml-2 text-lg font-semibold">Order Items</Text>
+              </View>
+              <View>
+                <StatusBadge status={item?.status ?? ""} />
+              </View>
             </View>
             {/* Item */}
             {item?.items?.map((item, i) => (
@@ -74,7 +84,7 @@ const OrderDetailScreen = () => {
             {/* Total */}
             <View className="flex-row justify-between mt-3">
               <Text className="text-lg font-semibold">Total</Text>
-              <Text className="text-lg font-bold text-[#b23a1a]">
+              <Text className="text-lg font-bold text-indigo-600">
                 {totalPrice}
               </Text>
             </View>
