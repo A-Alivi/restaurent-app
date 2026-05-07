@@ -5,7 +5,6 @@ import React from "react";
 import { Pressable, Text, View } from "react-native";
 import StatusBadge from "./ui/StatusBadge";
 function OrderCard({ order }: any) {
-  console.log(order);
   let totalPrice = 0;
   order.items.forEach((item: any) => (totalPrice += item.price));
   const formattedDate = formatDate(

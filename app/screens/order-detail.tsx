@@ -37,7 +37,6 @@ const OrderDetailScreen = () => {
                 })
               : ""}
           </Text>
-
           {/* Order Items Card */}
           <View className="bg-white rounded-2xl p-4 mb-4 shadow-sm">
             <View className="flex-row justify-between mb-3">
@@ -118,7 +117,6 @@ const OrderDetailScreen = () => {
             orderId={id}
             currentStatus={item?.status ?? "pending"}
             onChangeStatus={(id, status) => {
-              console.log("Selected status:", status);
               orderStore.updateOrderStatus(id, status);
             }}
           />

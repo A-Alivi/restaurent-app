@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Page() {
   const { signIn, errors, fetchStatus } = useSignIn();
@@ -31,11 +32,11 @@ export default function Page() {
       console.error(JSON.stringify(error, null, 2));
       return;
     }
-
     if (signIn.status === "complete") {
-      setTimeout(() => {
-        router.replace("/(tabs)");
-      }, 100);
+      // setTimeout(() => {
+      //   router.replace("/(tabs)");
+      // }, 100);
+      router.replace("/(tabs)");
     }
   };
 
@@ -99,65 +100,75 @@ export default function Page() {
 
   // 🔑 LOGIN SCREEN
   return (
-    <View className="flex-1 p-5 gap-3 bg-white">
-      <Text className="text-2xl font-bold">Sign in</Text>
+    <SafeAreaView>
+      {" "}
+      <View className="flex-1 p-5 gap-3 bg-white">
+        <Text className="text-2xl font-bold">Sign in</Text>
 
-      {/* EMAIL */}
-      <Text className="font-semibold">Email address</Text>
-      <TextInput
-        value={emailAddress}
-        placeholder="Enter email"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        onChangeText={setEmailAddress}
-        className="border border-gray-300 rounded-lg p-3 text-base bg-white"
-      />
-      {errors.fields.identifier && (
-        <Text className="text-red-500 text-sm">
-          {errors.fields.identifier.message}
-        </Text>
-      )}
-
-      {/* PASSWORD */}
-      <Text className="font-semibold">Password</Text>
-      <TextInput
-        value={password}
-        placeholder="Enter password"
-        secureTextEntry
-        onChangeText={setPassword}
-        className="border border-gray-300 rounded-lg p-3 text-base bg-white"
-      />
-      {errors.fields.password && (
-        <Text className="text-red-500 text-sm">
-          {errors.fields.password.message}
-        </Text>
-      )}
-
-      {/* LOGIN BUTTON */}
-      <Pressable
-        onPress={handleSubmit}
-        disabled={isDisabled}
-        className={`p-4 rounded-xl flex-row justify-center items-center ${
-          isDisabled ? "bg-gray-400" : "bg-blue-600"
-        }`}
-      >
-        {isLoading ? (
-          <>
-            <ActivityIndicator color="#fff" />
-            <Text className="text-white ml-2 font-semibold">Loading...</Text>
-          </>
-        ) : (
-          <Text className="text-white font-semibold">Login</Text>
+        {/* EMAIL */}
+        <Text className="font-semibold">Email address</Text>
+        <TextInput
+          value={emailAddress}
+          placeholder="Enter email"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          onChangeText={setEmailAddress}
+          className="border border-gray-300 rounded-lg p-3 text-base bg-white"
+        />
+        {errors.fields.identifier && (
+          <Text className="text-red-500 text-sm">
+            {errors.fields.identifier.message}
+          </Text>
         )}
-      </Pressable>
 
-      {/* SIGN UP */}
-      <View className="flex-row mt-4">
-        <Text>Don't have an account? </Text>
-        <Link href="/sign-up">
-          <Text className="text-blue-600 underline font-semibold">Sign up</Text>
-        </Link>
+        {/* PASSWORD */}
+        <Text className="font-semibold">Password</Text>
+        <TextInput
+          value={password}
+          placeholder="Enter password"
+          secureTextEntry
+          onChangeText={setPassword}
+          className="border border-gray-300 rounded-lg p-3 text-base bg-white"
+        />
+        {errors.fields.password && (
+          <Text className="text-red-500 text-sm">
+            {errors.fields.password.message}
+          </Text>
+        )}
+
+        {/* LOGIN BUTTON */}
+        <Pressable
+          onPress={() => {
+            handleSubmit();
+          }}
+          disabled={isDisabled}
+          className={`p-4 rounded-xl flex-row justify-center items-center ${
+            isDisabled ? "bg-gray-400" : "bg-blue-600"
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <ActivityIndicator color="#fff" />
+              <Text className="text-white ml-2 font-semibold">Loading...</Text>
+            </>
+          ) : (
+            <Text className="text-white font-semibold">Login</Text>
+          )}
+        </Pressable>
+
+        {/* SIGN UP */}
+        <View className="flex-row mt-4">
+          <Text>Don't have an account? </Text>
+          <Link href="/sign-up">
+            <Text className="text-blue-600 underline font-semibold">
+              Sign up
+            </Text>
+          </Link>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
+}
+function setActive(arg0: { session: any }) {
+  throw new Error("Function not implemented.");
 }
