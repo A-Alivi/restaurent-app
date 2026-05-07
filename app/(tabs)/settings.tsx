@@ -216,7 +216,7 @@ export default function Page() {
               : user?.emailAddresses[0].emailAddress}
           </Text>
           <Pressable style={styles.button} onPress={() => signOut()}>
-            <Text style={styles.buttonText}>Sign out</Text>
+            <Text style={styles.buttonText}>Log out</Text>
           </Pressable>
         </Show>
       </View>

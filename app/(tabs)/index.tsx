@@ -8,10 +8,6 @@ import { FlatList, View } from "react-native";
 export default function OrdersScreen() {
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("all");
-  // const setOrder = useOrderStore((state) => state.setOrders);
-  // useEffect(() => {
-  //   setOrder(orders);
-  // }, []);
   const orders = useOrderStore((state) => state.orders);
   const filteredOrders = orders.filter((order) => {
     const matchSearch = order.id.toLowerCase().includes(search.toLowerCase());
@@ -35,8 +31,6 @@ export default function OrdersScreen() {
         contentContainerStyle={{ paddingBottom: 100 }}
         renderItem={({ item }) => <OrderCard order={item} />}
       />
-
-      {/* <FloatingButton /> */}
     </View>
   );
 }

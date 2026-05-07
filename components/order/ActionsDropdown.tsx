@@ -9,7 +9,7 @@ type Props = {
   currentStatus: OrderStatus;
   onChangeStatus: (id: string, status: OrderStatus) => void;
 };
-export default function StatusSelectDropdown({
+function StatusSelectDropdown({
   orderId,
   currentStatus,
   onChangeStatus,
@@ -83,3 +83,5 @@ export default function StatusSelectDropdown({
     </View>
   );
 }
+
+export default React.memo(StatusSelectDropdown);

@@ -1,12 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import { formatDate } from "date-fns";
 import { router } from "expo-router";
+import React from "react";
 import { Pressable, Text, View } from "react-native";
 import StatusBadge from "./ui/StatusBadge";
-export default function OrderCard({ order }: any) {
+function OrderCard({ order }: any) {
   console.log(order);
   let totalPrice = 0;
-  order.items.forEach((element: any) => (totalPrice += element.price));
+  order.items.forEach((item: any) => (totalPrice += item.price));
   const formattedDate = formatDate(
     new Date(order.timestamps.updatedAt),
     "dd MMMM yyyy, hh:mm a",
@@ -54,3 +55,5 @@ export default function OrderCard({ order }: any) {
     </View>
   );
 }
+
+export default React.memo(OrderCard);
