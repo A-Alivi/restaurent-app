@@ -15,7 +15,6 @@ export default function OrdersScreen() {
     const matchStatus = status === "all" ? true : order.status === status;
     return matchSearch && matchStatus;
   });
-
   return (
     <SafeAreaView>
       <View className="flex-1 bg-orange-70 pt-12 px-4">
@@ -31,7 +30,7 @@ export default function OrdersScreen() {
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}
-          renderItem={({ item }) => <OrderCard order={item} />}
+          renderItem={(item: any) => <OrderCard order={item} />}
         />
       </View>
     </SafeAreaView>
