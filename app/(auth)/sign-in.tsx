@@ -53,7 +53,7 @@ export default function Page() {
   // 🔐 MFA SCREEN
   if (signIn.status === "needs_second_factor") {
     return (
-      <View className="flex-1 p-5 gap-3 bg-white">
+      <View className="flex-1 p-5 gap-3">
         <Text className="text-2xl font-bold">Verify your account</Text>
 
         <TextInput
@@ -101,10 +101,8 @@ export default function Page() {
   // 🔑 LOGIN SCREEN
   return (
     <SafeAreaView>
-      {" "}
-      <View className="flex-1 p-5 gap-3 bg-white">
-        <Text className="text-2xl font-bold">Sign in</Text>
-
+      <View className="flex-1 p-5 gap-3 justify-between">
+        <Text className="text-2xl font-bold text-center">Welcome!</Text>
         {/* EMAIL */}
         <Text className="font-semibold">Email address</Text>
         <TextInput

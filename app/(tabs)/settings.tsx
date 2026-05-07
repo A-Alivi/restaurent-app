@@ -19,7 +19,7 @@ export default function Page() {
 
   return (
     <SafeAreaView>
-      <View className="flex-1 bg-white px-6 pt-16">
+      <View className="flex-1 px-6 pt-16">
         {/* Header */}
         <View className="mb-8">
           <Text className="text-3xl font-bold text-gray-900">Welcome 👋</Text>
