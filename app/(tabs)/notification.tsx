@@ -1,11 +1,14 @@
 // screens/NotificationScreen.tsx
+import NotificationCard from "@/components/notification/NotificationCard";
 import { useOrderStore } from "@/store/useOrderStore";
+import { formatDistanceToNow } from "date-fns";
 import React from "react";
 import { FlatList, Text, View } from "react-native";
 import Header from "../../components/notification/Header";
 
 const NotificationScreen = () => {
   const pendingOrders = useOrderStore().getOrdersByStatus("pending");
+  const notification = pendingOrders;
   return (
     <View className="flex-1 bg-gray-100">
       <Header />
@@ -16,10 +19,6 @@ const NotificationScreen = () => {
             <Text className="text-2xl font-bold">Notification Center</Text>
             <Text className="text-gray-500">Real-time alerts and updates</Text>
           </View>
-
-          {/* <Pressable onPress={markAllRead}>
-            <Text className="text-orange-600 font-semibold">MARK ALL READ</Text>
-          </Pressable> */}
         </View>
       </View>
 
@@ -35,10 +34,18 @@ const NotificationScreen = () => {
           </>
         }
         renderItem={({ item }) => (
-          <View className="flex-col py-4 mt-4 px-3 border rounded-full  shadow-cyan-300 justify-between ">
-            <Text>new order has been added to the list</Text>
-            <Text>Order ID: {item.id}</Text>
-          </View>
+          <NotificationCard
+            title="New Order"
+            description="A new order has been added to the queue."
+            orderId={item.id}
+            time={
+              item?.timestamps?.updatedAt
+                ? formatDistanceToNow(new Date(item.timestamps.updatedAt), {
+                    addSuffix: true,
+                  })
+                : ""
+            }
+          />
         )}
       />
     </View>

@@ -125,28 +125,27 @@
 
 import { Show, useClerk, useUser } from "@clerk/expo";
 import { Link, useRouter } from "expo-router";
-import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { Settings } from "../../models/settings";
-const initialData: Settings = {
-  restaurant: {
-    name: "The Spicy Oven",
-    address: "123 Culinary Way, Suite 4B\nFlavor Town, FT 90210",
-    hours: "Mon - Sun: 11:00 AM - 11:00 PM",
-  },
-  notifications: {
-    pushEnabled: true,
-    soundEnabled: true,
-  },
-  system: {
-    apiConnected: true,
-    lastSynced: "Just now",
-  },
-};
+//import { Settings } from "../../models/settings";
+// const initialData: Settings = {
+//   restaurant: {
+//     name: "The Spicy Oven",
+//     address: "123 Culinary Way, Suite 4B\nFlavor Town, FT 90210",
+//     hours: "Mon - Sun: 11:00 AM - 11:00 PM",
+//   },
+//   notifications: {
+//     pushEnabled: true,
+//     soundEnabled: true,
+//   },
+//   system: {
+//     apiConnected: true,
+//     lastSynced: "Just now",
+//   },
+// };
 export default function Page() {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [settings, setSettings] = useState(initialData);
+  //const [settings, setSettings] = useState(initialData);
 
   const router = useRouter();
 
@@ -210,7 +209,12 @@ export default function Page() {
           </Link>
         </Show>
         <Show when="signed-in">
-          <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
+          <Text>
+            Hello{" "}
+            {user?.fullName != null
+              ? user?.fullName
+              : user?.emailAddresses[0].emailAddress}
+          </Text>
           <Pressable style={styles.button} onPress={() => signOut()}>
             <Text style={styles.buttonText}>Sign out</Text>
           </Pressable>

@@ -1,4 +1,4 @@
-export type NotificationType = "order" | "payment" | "inquiry" | "system";
+export type NotificationType = "order";
 
 export interface Notification {
   id: string;
@@ -6,6 +6,6 @@ export interface Notification {
   title: string;
   message: string;
   orderId?: string;
-  time: string; // "1m ago"
+  time: string;
   isRead: boolean;
 }
