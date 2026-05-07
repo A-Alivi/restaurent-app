@@ -52,7 +52,7 @@ export default function Page() {
       <View className="flex-1 px-5 py-6 gap-4">
         {/* Title */}
         <Text className="text-3xl font-bold text-gray-900 text-center">
-          Register :)
+          Register :{")"}
         </Text>
 
         {/* VERIFY STATE */}
