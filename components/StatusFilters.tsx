@@ -1,5 +1,5 @@
+import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
-
 const filters = [
   "all",
   "pending",
@@ -9,7 +9,7 @@ const filters = [
   "delivered",
 ];
 
-export default function StatusFilters({ selected, onSelect }: any) {
+function StatusFilters({ selected, onSelect }: any) {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View className="flex-row space-x-2 mb-4">
@@ -32,3 +32,4 @@ export default function StatusFilters({ selected, onSelect }: any) {
     </ScrollView>
   );
 }
+export default React.memo(StatusFilters);
