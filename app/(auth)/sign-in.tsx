@@ -167,6 +167,3 @@ export default function Page() {
     </SafeAreaView>
   );
 }
-function setActive(arg0: { session: any }) {
-  throw new Error("Function not implemented.");
-}
