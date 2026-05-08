@@ -16,20 +16,13 @@ function OrderCard({ order }: any) {
       {/* Top row */}
       <View className="flex-row justify-between">
         <Text className="text-indigo-600 font-bold">#{order.id}</Text>
-
-        {/* <Text className="text-orange-500 text-xs font-bold">
-          {order.status?.toUpperCase()}
-        </Text> */}
         <StatusBadge status={order.status} />
       </View>
       <Text className="text-gray-400 text-sm">{formattedDate}</Text>
-
       {/* Name */}
       <Text className="text-lg font-semibold mt-2">{order.user.name}</Text>
-
       {/* Address */}
       <Text className="text-gray-500 text-sm">{order.delivery.address}</Text>
-
       {/* Bottom row */}
       <View className="flex-row justify-between  items-end">
         <Pressable
@@ -46,13 +39,12 @@ function OrderCard({ order }: any) {
             <Text className="ms-2">See Details</Text>
           </View>
         </Pressable>
-
         <Text className="text-indigo-700 font-bold text-lg">
-          Rs.{totalPrice}
+          {"Rs. " + totalPrice.toFixed(2)}
         </Text>
       </View>
     </View>
   );
 }
 
-export default React.memo(OrderCard);
+export default OrderCard;

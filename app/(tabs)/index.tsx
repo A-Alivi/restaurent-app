@@ -30,7 +30,7 @@ export default function OrdersScreen() {
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 100 }}
-          renderItem={(item: any) => <OrderCard order={item} />}
+          renderItem={({ item }) => <OrderCard order={item} />}
         />
       </View>
     </SafeAreaView>
