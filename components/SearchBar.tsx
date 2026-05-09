@@ -16,4 +16,4 @@ function SearchBar({ value, onChangeText }: any) {
   );
 }
 
-export default React.memo(SearchBar);
+export default SearchBar;

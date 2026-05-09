@@ -32,4 +32,4 @@ function StatusFilters({ selected, onSelect }: any) {
     </ScrollView>
   );
 }
-export default React.memo(StatusFilters);
+export default StatusFilters;

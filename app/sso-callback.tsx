@@ -7,6 +7,7 @@ const SSOCallbackScreen = () => {
   if (!isLoaded) {
     return null;
   }
+  console.log("Goooo");
 
   if (isSignedIn) {
     return <Redirect href={"/(tabs)"} />;

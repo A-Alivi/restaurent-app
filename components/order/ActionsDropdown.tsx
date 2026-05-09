@@ -84,4 +84,4 @@ const StatusSelectDropdown = ({
   );
 };
 
-export default React.memo(StatusSelectDropdown);
+export default StatusSelectDropdown;

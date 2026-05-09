@@ -3,7 +3,7 @@ import { Link, useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Page() {
+export default function settingsScreen() {
   const { user } = useUser();
   const { signOut } = useClerk();
   const router = useRouter();
@@ -28,7 +28,6 @@ export default function Page() {
             Manage your account and authentication settings.
           </Text>
         </View>
-
         {/* Signed Out */}
         <Show when="signed-out">
           <View className="gap-4">

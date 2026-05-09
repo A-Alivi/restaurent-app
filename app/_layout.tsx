@@ -9,15 +9,15 @@ const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 if (!publishableKey) {
   throw new Error("Add your Clerk Publishable Key to the .env file");
 }
-const setOrder = useOrderStore((state) => state.setOrders);
-useEffect(() => {
-  setOrder(orders);
-}, []);
+
 export default function RootLayout() {
+  const setOrder = useOrderStore((state) => state.setOrders);
+  useEffect(() => {
+    setOrder(orders);
+  }, []);
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <SafeAreaProvider>
-        {/* <StatusBar barStyle="dark-content" /> */}
         <Stack screenOptions={{ headerShown: false }} />
       </SafeAreaProvider>
     </ClerkProvider>

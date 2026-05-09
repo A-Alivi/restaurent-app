@@ -1,4 +1,4 @@
-import { useAuth, useSignUp } from "@clerk/expo";
+import { useAuth, useSignUp, useUser } from "@clerk/expo";
 import { Link, useRouter } from "expo-router";
 import React from "react";
 import {
@@ -18,8 +18,8 @@ export default function Page() {
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [code, setCode] = React.useState("");
-
-  const handleSubmit = async () => {
+  const user = useUser();
+  const handleSignup = async () => {
     const { error } = await signUp.password({
       emailAddress,
       password,
@@ -37,9 +37,7 @@ export default function Page() {
       await signUp.finalize({
         navigate: ({ session, decorateUrl }) => {
           if (session?.currentTask) return;
-
-          const url = decorateUrl("/");
-          router.replace("/(tabs)");
+          router.navigate("/(tabs)");
         },
       });
     }
@@ -141,7 +139,7 @@ export default function Page() {
 
             {/* Submit Button */}
             <Pressable
-              onPress={handleSubmit}
+              onPress={handleSignup}
               disabled={
                 !emailAddress || !password || fetchStatus === "fetching"
               }
