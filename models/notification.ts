@@ -1,4 +1,9 @@
-export type NotificationType = "order";
+export type NotificationType =
+  | "order"
+  | "payment"
+  | "general"
+  | "inquiry"
+  | "system";
 
 export interface Notification {
   id: string;

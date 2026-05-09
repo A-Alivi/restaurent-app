@@ -10,7 +10,7 @@ const SSOCallbackScreen = () => {
   console.log("Goooo");
 
   if (isSignedIn) {
-    return <Redirect href={"/(tabs)"} />;
+    return <Redirect href={"/(admin)"} />;
   }
 
   return <Redirect href={"/(auth)/sign-in"} />;

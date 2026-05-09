@@ -1,5 +1,5 @@
 import { Show, useClerk, useUser } from "@clerk/expo";
-import { Link, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,7 +29,7 @@ export default function settingsScreen() {
           </Text>
         </View>
         {/* Signed Out */}
-        <Show when="signed-out">
+        {/* <Show when="signed-out">
           <View className="gap-4">
             <Link href="/(auth)/sign-in" asChild>
               <Pressable className="bg-orange-500 py-4 rounded-2xl items-center active:opacity-80">
@@ -47,7 +47,7 @@ export default function settingsScreen() {
               </Pressable>
             </Link>
           </View>
-        </Show>
+        </Show> */}
 
         {/* Signed In */}
         <Show when="signed-in">
