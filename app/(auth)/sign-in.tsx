@@ -33,10 +33,7 @@ export default function Page() {
       return;
     }
     if (signIn.status === "complete") {
-      // setTimeout(() => {
-      //   router.replace("/(tabs)");
-      // }, 100);
-      router.replace("/(tabs)");
+      router.replace("/(admin)");
     }
   };
 
@@ -45,7 +42,7 @@ export default function Page() {
 
     if (signIn.status === "complete") {
       setTimeout(() => {
-        router.replace("/(tabs)");
+        router.replace("/(admin)");
       }, 100);
     }
   };
