@@ -17,12 +17,12 @@ const SSOCallbackScreen = () => {
     return <Redirect href={"/(auth)/sign-in"} />;
   }
   if (role === "admin") {
-    return <Redirect href={"/(admin)"} />;
+    return <Redirect href={"/(order)"} />;
   }
   if (role === "staff") {
     return <Redirect href={"/(staff)"} />;
   }
-  return <Redirect href={"/(customer)"} />;
+  return <Redirect href={"/(notification)"} />;
 };
 
 export default SSOCallbackScreen;

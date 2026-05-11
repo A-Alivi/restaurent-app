@@ -3,15 +3,6 @@ import { Tabs } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function TabsLayout() {
-  // const { isSignedIn, isLoaded } = useAuth();
-
-  // if (!isLoaded) {
-  //   return null;
-  // }
-
-  // if (!isSignedIn) {
-  //   return <Redirect href="/sign-up" />;
-  // }
   return (
     <SafeAreaView className="flex-1">
       <Tabs

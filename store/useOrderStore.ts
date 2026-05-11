@@ -1,5 +1,5 @@
-import { OrderStatus, OrderStore } from "@/models/orders";
 import { create } from "zustand";
+import { OrderStatus, OrderStore } from "../models/orders";
 export const useOrderStore = create<OrderStore>((set, get) => ({
   orders: [],
 
