@@ -1,4 +1,4 @@
-import { useAuth, useSignIn, useUser } from "@clerk/expo";
+import { useAuth, useSignIn } from "@clerk/expo";
 import { Link, useRouter } from "expo-router";
 import React from "react";
 import {
@@ -21,8 +21,6 @@ export default function Page() {
 
   const isLoading = fetchStatus === "fetching";
   const isDisabled = !emailAddress || !password || isLoading;
-  const user = useUser();
-  const role = user.user?.publicMetadata.role;
   const handleSubmit = async () => {
     try {
       const { error } = await signIn.create({
@@ -36,7 +34,7 @@ export default function Page() {
       }
 
       if (signIn.status === "complete") {
-        router.replace("/(admin)");
+        router.replace("/");
       }
     } catch (error) {
       console.log(JSON.stringify(error, null, 2));
@@ -47,7 +45,7 @@ export default function Page() {
     await signIn.mfa.verifyEmailCode({ code });
 
     if (signIn.status === "complete") {
-      router.replace("/(admin)");
+      router.replace("/");
     }
   };
 
