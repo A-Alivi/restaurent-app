@@ -21,8 +21,8 @@ export default function settingsScreen() {
     <SafeAreaView>
       <View className="flex-1 px-6 pt-16">
         {/* Header */}
-        <View className="mb-8">
-          <Text className="text-3xl font-bold text-gray-900">Welcome 👋</Text>
+        <View className="mb-8 flex-1 items-center justify-center">
+          <Text className="text-3xl  font-bold text-gray-900">{`Welcome 👋 as ${user?.publicMetadata.role ? user?.publicMetadata.role : "User"}`}</Text>
 
           <Text className="text-base text-gray-500 mt-2">
             Manage your account and authentication settings.

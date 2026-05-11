@@ -1,5 +1,5 @@
 import { useAuth, useSignIn } from "@clerk/expo";
-import { Link, useRouter } from "expo-router";
+import { Link, Redirect, useRouter } from "expo-router";
 import React from "react";
 import {
   ActivityIndicator,
@@ -34,7 +34,8 @@ export default function Page() {
       }
 
       if (signIn.status === "complete") {
-        router.replace("/");
+        // router.replace("/");
+        <Redirect href={"/"} />;
       }
     } catch (error) {
       console.log("fd", JSON.stringify(error, null, 2));
@@ -45,7 +46,8 @@ export default function Page() {
     await signIn.mfa.verifyEmailCode({ code });
 
     if (signIn.status === "complete") {
-      router.replace("/");
+      // router.replace("/");
+      <Redirect href={"/"} />;
     }
   };
 
@@ -127,11 +129,11 @@ export default function Page() {
           onChangeText={setPassword}
           className="border border-gray-300 rounded-lg p-3 text-base bg-white"
         />
-        {/* {errors.fields.password && (
+        {errors.fields.password && (
           <Text className="text-red-500 text-sm">
             {errors.fields.password.message}
           </Text>
-        )} */}
+        )}
 
         {/* LOGIN BUTTON */}
         <Pressable

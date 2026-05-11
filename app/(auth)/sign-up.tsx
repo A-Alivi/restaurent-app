@@ -1,5 +1,5 @@
 import { useAuth, useSignUp, useUser } from "@clerk/expo";
-import { Link, useRouter } from "expo-router";
+import { Link, Redirect, useRouter } from "expo-router";
 import React from "react";
 import {
   ActivityIndicator,
@@ -37,7 +37,8 @@ export default function Page() {
       await signUp.finalize({
         navigate: ({ session, decorateUrl }) => {
           if (session?.currentTask) return;
-          router.navigate("/");
+          // router.navigate("/");
+          <Redirect href={"/"} />;
         },
       });
     }
