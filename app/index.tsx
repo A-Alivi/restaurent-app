@@ -5,7 +5,7 @@ import SSOCallbackScreen from "./sso-callback";
 
 const index = () => {
   return (
-    <View>
+    <View className="flex-1 items-center justify-center">
       <SSOCallbackScreen />
     </View>
   );

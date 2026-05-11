@@ -29,7 +29,7 @@ export default function Page() {
       });
 
       if (error) {
-        console.error(JSON.stringify(error, null, 2));
+        console.error("po", JSON.stringify(error, null, 2));
         return;
       }
 
@@ -37,7 +37,7 @@ export default function Page() {
         router.replace("/");
       }
     } catch (error) {
-      console.log(JSON.stringify(error, null, 2));
+      console.log("fd", JSON.stringify(error, null, 2));
     }
   };
 
@@ -127,11 +127,11 @@ export default function Page() {
           onChangeText={setPassword}
           className="border border-gray-300 rounded-lg p-3 text-base bg-white"
         />
-        {errors.fields.password && (
+        {/* {errors.fields.password && (
           <Text className="text-red-500 text-sm">
             {errors.fields.password.message}
           </Text>
-        )}
+        )} */}
 
         {/* LOGIN BUTTON */}
         <Pressable

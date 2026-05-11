@@ -9,7 +9,7 @@ const SSOCallbackScreen = () => {
   if (!isLoaded) {
     return (
       <View className="flex-1 items-center justify-center">
-        <ActivityIndicator />
+        <ActivityIndicator size="large" />
       </View>
     );
   }

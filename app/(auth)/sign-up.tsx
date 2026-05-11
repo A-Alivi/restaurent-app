@@ -37,7 +37,7 @@ export default function Page() {
       await signUp.finalize({
         navigate: ({ session, decorateUrl }) => {
           if (session?.currentTask) return;
-          router.navigate("/(admin)");
+          router.navigate("/");
         },
       });
     }

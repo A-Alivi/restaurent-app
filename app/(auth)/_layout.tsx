@@ -10,7 +10,7 @@ export default function AuthRoutesLayout() {
   }
 
   if (isSignedIn) {
-    return <Redirect href={"/(admin)"} />;
+    return <Redirect href={"/"} />;
   }
 
   return (
