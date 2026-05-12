@@ -2,7 +2,6 @@ import { MenuItem } from "@/models/menu";
 import { Image } from "expo-image";
 import React, { memo } from "react";
 import { Pressable, Text, View } from "react-native";
-import Animated, { FadeInDown } from "react-native-reanimated";
 
 type Props = {
   item: MenuItem;
@@ -11,10 +10,7 @@ type Props = {
 
 function MenuCardComponent({ item, index }: Props) {
   return (
-    <Animated.View
-      entering={FadeInDown.delay(index * 120)}
-      className="mb-6 rounded-[32px] border border-gray-100 bg-white p-4 shadow-sm"
-    >
+    <View className="p-2 shadow rounded m-2">
       <Image
         source={item.image}
         contentFit="cover"
@@ -42,29 +38,27 @@ function MenuCardComponent({ item, index }: Props) {
           )}
         </View>
 
-        <Text className="text-3xl font-bold text-slate-900">
+        <Text className="text-xl font-bold text-slate-900">
           ${item.basePrice}
         </Text>
       </View>
 
-      <Text className="mt-4 text-3xl font-bold text-slate-900">
-        {item.name}
-      </Text>
+      <Text className="mt-4 text-xl font-bold text-slate-900">{item.name}</Text>
 
       <Text className="mt-2 text-base leading-7 text-gray-500">
         {item.description}
       </Text>
 
-      <View className="mt-6 border-t border-gray-100 pt-5">
+      <View className=" border-t border-gray-100 pt-5">
         <View className="flex-row items-center justify-between">
           <View className="flex-row">
-            <View className="mr-10">
+            <View className="m-2">
               <Text className="text-xs font-semibold tracking-widest text-gray-400">
                 STOCK
               </Text>
 
               <Text
-                className={`mt-2 text-2xl font-semibold ${
+                className={`mt-2 text-xl font-semibold ${
                   item.stock === 0 ? "text-red-500" : "text-slate-900"
                 }`}
               >
@@ -72,7 +66,7 @@ function MenuCardComponent({ item, index }: Props) {
               </Text>
             </View>
 
-            <View>
+            <View className="m-2">
               <Text className="text-xs font-semibold tracking-widest text-gray-400">
                 STATUS
               </Text>
@@ -85,7 +79,7 @@ function MenuCardComponent({ item, index }: Props) {
                 />
 
                 <Text
-                  className={`text-2xl font-medium ${
+                  className={`text-xl font-medium ${
                     item.isAvailable ? "text-green-600" : "text-red-500"
                   }`}
                 >
@@ -96,7 +90,7 @@ function MenuCardComponent({ item, index }: Props) {
           </View>
 
           <Pressable
-            className={`rounded-full border px-7 py-4 ${
+            className={`rounded-xl border px-2 py-2 m-2 ${
               item.isAvailable ? "border-gray-300" : "border-red-300"
             }`}
           >
@@ -110,7 +104,7 @@ function MenuCardComponent({ item, index }: Props) {
           </Pressable>
         </View>
       </View>
-    </Animated.View>
+    </View>
   );
 }
 

@@ -12,8 +12,8 @@ type Props = {
 
 function CategoryTabComponent({ item, active }: Props) {
   return (
-    <Pressable className="mr-8 items-center">
-      <View className="flex-row items-center">
+    <Pressable className="flex-row items-center justify-center">
+      <View className="">
         <Text
           className={`text-base font-semibold ${
             active ? "text-black" : "text-gray-500"

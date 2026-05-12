@@ -40,16 +40,8 @@ export default function MenuManagementScreen() {
             </Pressable>
             <View className="flex-row">
               <AnalyticsCard title="TOTAL ITEMS" value={24} />
-              <AnalyticsCard
-                title="AVAILABLE"
-                value={20}
-                borderColor="#22C55E"
-              />
-              <AnalyticsCard
-                title="OUT OF STOCK"
-                value={4}
-                borderColor="#EF4444"
-              />
+              <AnalyticsCard title="AVAILABLE" value={20} />
+              <AnalyticsCard title="OUT OF STOCK" value={4} />
             </View>
 
             {categories.map((item, index) => (
