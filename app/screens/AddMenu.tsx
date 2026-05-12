@@ -1,32 +1,41 @@
+import { MenuCategory, MenuItem } from "@/models/menu";
+import { useMenuStore } from "@/store/useMenuStore";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
 import {
-    Pressable,
-    ScrollView,
-    Switch,
-    Text,
-    TextInput,
-    View,
+  Pressable,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const categories = ["Burger", "Pizza", "Drinks", "Dessert", "BBQ", "Fast Food"];
+const categories: MenuCategory[] = [
+  "Burger",
+  "Pizza",
+  "Drinks",
+  "Dessert",
+  "BBQ",
+  "Fast Food",
+];
 
 export default function AddMenuScreen() {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
+  const addMenuItem = useMenuStore((state) => state.addMenuItem);
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
 
-  const [category, setCategory] = useState("Burger");
+  const [category, setCategory] = useState<MenuCategory>("BBQ");
 
   const [featured, setFeatured] = useState(false);
 
   const [available, setAvailable] = useState(true);
 
   const handleSubmit = () => {
-    const newItem = {
+    const newItem: MenuItem = {
       id: Date.now().toString(),
       name,
       description,
@@ -40,7 +49,7 @@ export default function AddMenuScreen() {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-
+    addMenuItem(newItem);
     console.log(newItem);
   };
 
@@ -55,7 +64,7 @@ export default function AddMenuScreen() {
           </Pressable>
 
           <View>
-            <Text className="text-2xl font-bold text-slate-900">
+            <Text className="text-xl font-semibold text-slate-900">
               Add Menu Item
             </Text>
 
@@ -93,7 +102,7 @@ export default function AddMenuScreen() {
           <TextInput
             value={name}
             onChangeText={setName}
-            placeholder="Zinger Burger"
+            placeholder="eg: Zinger Burger"
             className="rounded-3xl border border-gray-200 bg-white px-5 py-5 text-base text-slate-900"
           />
         </View>
@@ -216,7 +225,9 @@ export default function AddMenuScreen() {
         {/* BUTTON */}
 
         <Pressable
-          onPress={handleSubmit}
+          onPress={() => {
+            handleSubmit();
+          }}
           className="rounded-[28px] bg-[#001B3D] py-5"
         >
           <Text className="text-center text-lg font-bold text-white">

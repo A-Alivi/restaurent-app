@@ -55,7 +55,7 @@ export default function MenuManagementScreen() {
       />
       <View className="flex-1 justify-end items-end">
         <Pressable
-          onPress={() => router.push("/../screens/AddMenu")}
+          onPress={() => router.push("/screens/AddMenu")}
           className="h-10 w-10 m-2 items-center justify-center rounded-full bg-black shadow-xl"
         >
           <Plus size={30} color="White" />
