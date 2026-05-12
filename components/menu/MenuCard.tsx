@@ -6,10 +6,9 @@ import { Pressable, Text, View } from "react-native";
 
 type Props = {
   item: MenuItem;
-  index: number;
 };
 
-function MenuCardComponent({ item, index }: Props) {
+function MenuCardComponent({ item }: Props) {
   return (
     <View className="p-2 shadow rounded-2xl m-2">
       <Image
@@ -107,12 +106,7 @@ function MenuCardComponent({ item, index }: Props) {
                 item.isAvailable ? "text-slate-900" : "text-red-500"
               }`}
             >
-              {item.isAvailable ? (
-                <Edit />
-              ) : (
-                // <Ionicons name="create-outline" size={25} color="black" />
-                "Restock"
-              )}
+              {item.isAvailable ? <Edit /> : "Restock"}
             </Text>
           </Pressable>
         </View>

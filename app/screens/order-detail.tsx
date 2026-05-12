@@ -6,8 +6,8 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useOrderStore } from "../store/useOrderStore";
-import getInitials from "../utils/getInitials";
+import { useOrderStore } from "../../store/useOrderStore";
+import getInitials from "../../utils/getInitials";
 const OrderDetailScreen = () => {
   const router = useRouter();
   const params = useLocalSearchParams();

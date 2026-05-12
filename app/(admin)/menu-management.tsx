@@ -3,12 +3,14 @@ import { Header } from "@/components/menu/Header";
 import { MenuCard } from "@/components/menu/MenuCard";
 import SearchInput from "@/components/menu/SearchInput";
 import { useMenuStore } from "@/store/useMenuStore";
+import { router } from "expo-router";
 import { Plus, SlidersHorizontal } from "lucide-react-native";
 import React, { useState } from "react";
 import { FlatList, Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 export default function MenuManagementScreen() {
+  const [openModal, setOpenModal] = useState(false);
+
   const menuList = useMenuStore((state) => state.menu);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
@@ -18,6 +20,7 @@ export default function MenuManagementScreen() {
       category === "all" ? true : menu.category === category;
     return matchSearch && matchCategory;
   });
+  const addMenuItem = useMenuStore((state) => state.addMenuItem);
   return (
     <SafeAreaView className="flex-1 bg-[#F7F7F8]">
       <FlatList
@@ -32,9 +35,7 @@ export default function MenuManagementScreen() {
         ListHeaderComponent={
           <>
             <Header />
-
             <SearchInput value={search} onChangeText={setSearch} />
-
             <Pressable className="mt-5 flex-row items-center justify-center rounded-3xl border border-gray-200 bg-white py-5">
               <SlidersHorizontal size={20} color="#111827" />
             </Pressable>
@@ -50,10 +51,13 @@ export default function MenuManagementScreen() {
             <View className="mb-6 mt-4 h-px bg-gray-200" />
           </>
         }
-        renderItem={({ item, index }) => <MenuCard item={item} index={index} />}
+        renderItem={({ item }) => <MenuCard item={item} />}
       />
       <View className="flex-1 justify-end items-end">
-        <Pressable className="h-10 w-10 m-2 items-center justify-center rounded-full bg-black shadow-xl">
+        <Pressable
+          onPress={() => router.push("/../screens/AddMenu")}
+          className="h-10 w-10 m-2 items-center justify-center rounded-full bg-black shadow-xl"
+        >
           <Plus size={30} color="White" />
         </Pressable>
       </View>
