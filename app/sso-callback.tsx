@@ -17,7 +17,7 @@ const SSOCallbackScreen = () => {
     return <Redirect href={"/(auth)/sign-in"} />;
   }
   if (role === "admin") {
-    return <Redirect href={"/(order)"} />;
+    return <Redirect href={"/(admin)"} />;
   }
   if (role === "staff") {
     return <Redirect href={"/(staff)"} />;

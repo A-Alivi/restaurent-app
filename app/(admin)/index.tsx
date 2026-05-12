@@ -2,6 +2,7 @@ import ListHeader from "@/components/ListHeader";
 import OrderCard from "@/components/OrderCard";
 import SearchBar from "@/components/SearchBar";
 import StatusFilters from "@/components/StatusFilters";
+import { useLoadOrders } from "@/hooks/useLoadOrders";
 import { useOrderStore } from "@/store/useOrderStore";
 import { useUser } from "@clerk/expo";
 import React, { useState } from "react";
@@ -16,6 +17,7 @@ export default function OrdersScreen() {
     const matchStatus = status === "all" ? true : order.status === status;
     return matchSearch && matchStatus;
   });
+  useLoadOrders();
 
   return (
     <View className="flex-1 bg-orange-70 pt-12 px-4">

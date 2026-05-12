@@ -13,7 +13,7 @@ export default function settingScreen() {
       console.log("Logout error:", error);
     }
   };
-  return <Redirect href={"/(order)/settings"} />;
+  return <Redirect href={"/(admin)/settings"} />;
 
   // return (
   //   <SafeAreaView>

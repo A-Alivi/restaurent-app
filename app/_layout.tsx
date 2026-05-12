@@ -1,4 +1,6 @@
+import { menuItems } from "@/data/menu";
 import { orders } from "@/data/orders";
+import { useMenuStore } from "@/store/useMenuStore";
 import { useOrderStore } from "@/store/useOrderStore";
 import { ClerkProvider } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
@@ -15,6 +17,11 @@ export default function RootLayout() {
   useEffect(() => {
     setOrder(orders);
   }, []);
+  const setMenu = useMenuStore((state) => state.setMenu);
+  useEffect(() => {
+    setMenu(menuItems);
+  }, []);
+
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <SafeAreaProvider>

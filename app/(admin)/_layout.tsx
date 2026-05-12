@@ -29,6 +29,15 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
+          name="menu-management"
+          options={{
+            title: "Menu",
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="fast-food" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tabs.Screen
           name="settings"
           options={{
             title: "Settings",
@@ -37,15 +46,6 @@ export default function TabsLayout() {
             ),
           }}
         />
-        {/* <Tabs.Screen
-          name="home"
-          options={{
-            title: "Home",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
-            ),
-          }}
-        /> */}
       </Tabs>
     </SafeAreaView>
   );
