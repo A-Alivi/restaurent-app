@@ -1,5 +1,6 @@
 import { MenuItem } from "@/models/menu";
 import { Image } from "expo-image";
+import { Edit } from "lucide-react-native";
 import React, { memo } from "react";
 import { Pressable, Text, View } from "react-native";
 
@@ -10,7 +11,7 @@ type Props = {
 
 function MenuCardComponent({ item, index }: Props) {
   return (
-    <View className="p-2 shadow rounded m-2">
+    <View className="p-2 shadow rounded-2xl m-2">
       <Image
         source={item.image}
         contentFit="cover"
@@ -23,11 +24,16 @@ function MenuCardComponent({ item, index }: Props) {
 
       <View className="mt-4 flex-row items-center justify-between">
         <View className="flex-row items-center">
-          <View className="rounded-full bg-blue-100 px-3 py-1">
-            <Text className="text-[10px] font-bold tracking-widest text-blue-700">
-              {item.name}
-            </Text>
-          </View>
+          {item.tags?.map((tag) => (
+            <View className="rounded-full bg-blue-100 px-3 py-1">
+              <Text
+                key={tag}
+                className="text-[10px] font-bold tracking-widest text-blue-700"
+              >
+                {tag}
+              </Text>
+            </View>
+          ))}
 
           {item.isFeatured && (
             <View className="ml-2 rounded-full bg-orange-100 px-3 py-1">
@@ -39,11 +45,13 @@ function MenuCardComponent({ item, index }: Props) {
         </View>
 
         <Text className="text-xl font-bold text-slate-900">
-          ${item.basePrice}
+          {"Rs." + item.basePrice}
         </Text>
       </View>
 
-      <Text className="mt-4 text-xl font-bold text-slate-900">{item.name}</Text>
+      <Text className="mt-4 text-xl font-semibold text-slate-900">
+        {item.name}
+      </Text>
 
       <Text className="mt-2 text-base leading-7 text-gray-500">
         {item.description}
@@ -62,7 +70,7 @@ function MenuCardComponent({ item, index }: Props) {
                   item.stock === 0 ? "text-red-500" : "text-slate-900"
                 }`}
               >
-                {item.stock} units
+                {item.stock + " Units"}
               </Text>
             </View>
 
@@ -99,7 +107,12 @@ function MenuCardComponent({ item, index }: Props) {
                 item.isAvailable ? "text-slate-900" : "text-red-500"
               }`}
             >
-              {item.isAvailable ? "Edit" : "Restock"}
+              {item.isAvailable ? (
+                <Edit />
+              ) : (
+                // <Ionicons name="create-outline" size={25} color="black" />
+                "Restock"
+              )}
             </Text>
           </Pressable>
         </View>

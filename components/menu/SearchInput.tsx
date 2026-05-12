@@ -1,13 +1,20 @@
-import { Search } from "lucide-react-native";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Text, View } from "react-native";
+import { TextInput, View } from "react-native";
 
-export function SearchInput() {
+function SearchInput({ value, onChangeText }: any) {
   return (
-    <View className="mt-6 flex-row items-center rounded-3xl border border-gray-200 bg-white px-5 py-5">
-      <Search size={22} color="#6B7280" />
+    <View className="bg-gray-100 flex-row border  items-center px-4 py-3 rounded-xl mt-3 mb-2">
+      <Ionicons className="mr-2" name="search" size={18} />
 
-      <Text className="ml-4 text-lg text-gray-400">Search menu items...</Text>
+      <TextInput
+        value={value}
+        onChangeText={onChangeText}
+        placeholder="Search menu..."
+        className="flex-1 border-0"
+      />
     </View>
   );
 }
+
+export default SearchInput;
