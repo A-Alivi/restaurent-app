@@ -8,7 +8,7 @@ import {
   Switch,
   Text,
   TextInput,
-  View
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -140,12 +140,10 @@ export default function AddMenuScreen() {
               className="rounded-3xl border border-gray-200 bg-white px-5 py-5 text-base text-slate-900"
             />
           </View>
-
           <View className="flex-1">
             <Text className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-500">
               Stock
             </Text>
-
             <TextInput
               value={stock}
               onChangeText={setStock}
@@ -187,9 +185,7 @@ export default function AddMenuScreen() {
             })}
           </View>
         </View>
-
         {/* SWITCHES */}
-
         <View className="mb-4 rounded-[28px] bg-white p-5">
           <View className="flex-row items-center justify-between">
             <View>
@@ -230,7 +226,7 @@ export default function AddMenuScreen() {
           }}
           className="rounded-[28px] bg-[#001B3D] py-5"
         >
-          <Text className="text-center text-lg font-bold text-white">
+          <Text className="text-center text-lg font-semibold text-white">
             Save Menu Item
           </Text>
         </Pressable>
